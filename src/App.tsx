@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import About from "./pages/About";
 import Home from "./pages/Home";
+import Notfound from "./pages/Notfound";
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
           <Route path="/:id" element={<ProductDetails />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<Notfound />} /> */}
+          <Route path="/cart" element={<Cart />} />*/}
+          <Route path="*" element={<Notfound />} />
         </Routes>
       </main>
       <Footer />
