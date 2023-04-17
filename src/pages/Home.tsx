@@ -6,7 +6,7 @@ import Slider from "../components/slides/Slider";
 const Home = () => {
   return (
     <div className="home">
-      {/* <Slider /> */}
+      <Slider />
       <FeatureProducts />
       <Consultation />
       <BestSelling />
