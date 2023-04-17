@@ -68,3 +68,11 @@
   position: relative;
   z-index: 0;
 }
+
+main {
+  min-height: calc(84vh - 30px);
+}
+.footer {
+  position: relative;
+  inset: auto 0 0;
+}
