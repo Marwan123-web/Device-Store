@@ -1,0 +1,47 @@
+[
+  {
+    "type": "local",
+    "id": "Navbar",
+    "name": "Navbar Data",
+    "url": "http://",
+    "method": "GET",
+    "data": [
+      {
+        "id": "Home",
+        "name": "Home",
+        "url": "/",
+        "icon": ""
+      },
+      {
+        "id": "About",
+        "name": "About",
+        "url": "/about",
+        "icon": ""
+      },
+      {
+        "id": "Product",
+        "name": "Product",
+        "url": "/product",
+        "icon": ""
+      },
+      {
+        "id": "Booking",
+        "name": "Booking",
+        "url": "/booking",
+        "icon": ""
+      },
+      {
+        "id": "Contact",
+        "name": "Contact",
+        "url": "/contact",
+        "icon": ""
+      },
+      {
+        "id": "Cart",
+        "name": "Cart",
+        "url": "/cart",
+        "icon": ""
+      }
+    ]
+  }
+]
