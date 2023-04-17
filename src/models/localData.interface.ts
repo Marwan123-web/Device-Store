@@ -1,5 +1,5 @@
 import { ProductI } from "./products.interface";
-import { SlideI } from "./slide";
+import { SlideI } from "./slide.interface";
 import { TMemberI } from "./teamMembers.interface";
 export interface LocalDataI {
   type: string;

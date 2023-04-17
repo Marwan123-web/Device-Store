@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FetchHook from "../../hooks/FetchHook";
-import { SlideI } from "../../models/slide";
+import { SlideI } from "../../models/slide.interface";
 import Slide from "./Slide";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 

@@ -440,5 +440,34 @@
         "img": "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2018/12/team6-free-img.png"
       }
     ]
+  },
+  {
+    "type": "local",
+    "id": "ContactUs",
+    "name": "ContactUs",
+    "url": "",
+    "method": "",
+    "data": [
+      {
+        "title": "Sales",
+        "desc": " Expert sales assistance for all customers. Our sales team is dedicated to providing expert guidance to customers",
+        "phn": "xxxx 123 4567"
+      },
+      {
+        "title": "Complaints",
+        "desc": "We take customer satisfaction seriously and strive to address any complaints in a timely and efficient manner",
+        "phn": "xxxx 123 4567"
+      },
+      {
+        "title": "Returns",
+        "desc": "Hassle-free returns and exchanges. We understand that sometimes products just don't work out. ",
+        "phn": "xxxx 123 4567"
+      },
+      {
+        "title": "Marketing",
+        "desc": "Our marketing team works collaboratively with businesses to help them grow and succeed",
+        "phn": "xxxx 123 4567"
+      }
+    ]
   }
 ]

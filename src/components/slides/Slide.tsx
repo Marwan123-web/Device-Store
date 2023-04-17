@@ -1,4 +1,4 @@
-import { SlideI } from "../../models/slide";
+import { SlideI } from "../../models/slide.interface";
 import { Link } from "react-router-dom";
 const Slide = ({ image }: { image: SlideI }) => {
   return (
