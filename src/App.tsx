@@ -1,6 +1,6 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./pages/Home";
 
@@ -21,6 +21,7 @@ function App() {
           <Route path="*" element={<Notfound />} /> */}
         </Routes>
       </main>
+      <Footer />
     </section>
   );
 }
