@@ -1,13 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { LocalDataI } from "../models/localData.model";
+import { useEffect, useState } from "react";
+import { LocalDataI } from "../models/localData.interface";
 import urls from "../urls/urls.json";
 const FetchHook = (id: string) => {
   const [data, setData] = useState<LocalDataI>();
 
   useEffect(() => {
-    const objectData = urls.find((url) => url.id === id);
-    console.log(objectData);
+    const objectData: any = urls.find((url) => url.id === id);
     if (objectData?.type === "local") {
       setData(objectData);
     } else {
