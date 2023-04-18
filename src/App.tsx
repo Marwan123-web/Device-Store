@@ -3,6 +3,7 @@ import "./App.css";
 import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import About from "./pages/About";
+import CartPage from "./pages/Cart";
 import ContactUs from "./pages/ContactUs";
 import DetailsPage from "./pages/DetailsPage";
 import Home from "./pages/Home";
@@ -18,10 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/product" element={<Product />} />
-
-          {/* <Route path="/booking" element={<Booking />} />
-          
-          <Route path="/cart" element={<Cart />} /> */}
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/:id" element={<DetailsPage />} />
           <Route path="/product/:id" element={<DetailsPage />} />
           <Route path="/contact" element={<ContactUs />} />

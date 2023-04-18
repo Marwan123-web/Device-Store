@@ -25,12 +25,6 @@
         "icon": ""
       },
       {
-        "id": "Booking",
-        "name": "Booking",
-        "url": "/booking",
-        "icon": ""
-      },
-      {
         "id": "Contact",
         "name": "Contact",
         "url": "/contact",

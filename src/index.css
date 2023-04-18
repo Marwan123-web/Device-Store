@@ -7,7 +7,7 @@
 }
 
 .herobg {
-  background-image: url("https://images.unsplash.com/photo-1622037022824-0c71d511ef3c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-image: url("./asstes/images/hands.avif");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -15,18 +15,17 @@
   z-index: -1;
 }
 
-.offer {
-  background-image: url("https://plus.unsplash.com/premium_photo-1663054524168-60a30950acb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+.cartbg {
+  background-image: url("./asstes/images/cart");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
+  background-position: top;
   position: relative;
   z-index: -1;
 }
 
 .consultation {
-  background-image: url("https://img.freepik.com/premium-vector/consultant-manager-sitting-her-computer-talking-with-client-call-center_530733-2767.jpg");
+  background-image: url("./asstes/images/consultant.avif");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center top;

@@ -18,7 +18,7 @@ const NavBar = () => {
           {navs?.data?.map((nav: LocalDataDI) => (
             <li key={nav.id}>
               <NavLink to={nav?.url}>
-                {nav?.icon ? nav?.icon : nav?.name}
+                {nav?.name === "Cart" ? <FaShoppingCart /> : nav?.name}
               </NavLink>
             </li>
           ))}
