@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
+import DetailsPage from "./pages/DetailsPage";
 import Home from "./pages/Home";
 import Notfound from "./pages/Notfound";
 import Product from "./pages/Product";
@@ -17,12 +18,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/product" element={<Product />} />
-          {/* <Route path="/product" element={<Product />} />
-          <Route path="product/:id" element={<ProductDetails />} />
-          <Route path="/:id" element={<ProductDetails />} />
-          <Route path="/booking" element={<Booking />} />
+
+          {/* <Route path="/booking" element={<Booking />} />
           
-          <Route path="/cart" element={<Cart />} />*/}
+          <Route path="/cart" element={<Cart />} /> */}
+          <Route path="/:id" element={<DetailsPage />} />
+          <Route path="/product/:id" element={<DetailsPage />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="*" element={<Notfound />} />
         </Routes>
