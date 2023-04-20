@@ -3,6 +3,7 @@ import FetchHook from "../../hooks/FetchHook";
 import { SlideI } from "../../models/slide.interface";
 import Slide from "./Slide";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import Button from "../Shared/Button";
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
@@ -37,23 +38,27 @@ const Slider = () => {
       </div>
       <div className="btns absolute z-[1]  text-gray-50 bottom-[50%] w-screen ">
         <div className="flex  justify-between pr-5 pl-1 gap-10 ">
-          <button
-            onClick={prevSlide}
-            className="backdrop-blur-xl bg-black bg-opacity-50 text-sky-50 px-4 py-7"
+          <Button
+            classes={
+              "backdrop-blur-xl bg-black bg-opacity-50 text-sky-50 px-4 py-7"
+            }
+            ButtonFun={prevSlide}
           >
             <span>
               <BsArrowLeft />
             </span>
-          </button>
+          </Button>
 
-          <button
-            onClick={nextSlide}
-            className="backdrop-blur-xl bg-black bg-opacity-50 text-sky-50 px-4 py-5"
+          <Button
+            classes={
+              "backdrop-blur-xl bg-black bg-opacity-50 text-sky-50 px-4 py-5"
+            }
+            ButtonFun={nextSlide}
           >
             <span>
               <BsArrowRight />
             </span>
-          </button>
+          </Button>
         </div>
       </div>
     </div>

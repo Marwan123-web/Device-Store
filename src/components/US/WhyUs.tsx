@@ -11,7 +11,7 @@ const WhyUs = () => {
         <h2 className="text-4xl py-14 text-center font-semibold text-gray-700">
           Why Choose Us
         </h2>
-        <div className="grid grid-cols-4 gap-10 justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-between">
           <div className="text-center  flex flex-col gap-3 bg-gray-100 py-10 px-4">
             <div className="flex justify-center">
               <FaGlobe className="text-7xl text-gray-700" />

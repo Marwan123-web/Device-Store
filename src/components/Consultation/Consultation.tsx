@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Button from "../Shared/Button";
 
 const Consultation = () => {
   const navigate = useNavigate();
@@ -14,12 +15,8 @@ const Consultation = () => {
           </h1>
           <p className="text-lg">Get ultimate solution from our talent</p>
         </div>
-        <button
-          className="text-gray-50 border rounded-full border-sky-500 px-10 bg-sky-500 py-2"
-          onClick={() => navigate("booking")}
-        >
-          BookNow
-        </button>
+        <Button label={'BookNow'} classes={'text-gray-50 border rounded-full border-sky-500 px-10 bg-sky-500 py-2'}
+        ButtonFun={() => navigate("contact")}/>
       </div>
     </section>
   );

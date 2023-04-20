@@ -14,7 +14,7 @@ const Contact = () => {
         <h2 className="text-5xl text-gray-700 font-semibold text-center pb-5 ">
           We're here to help you
         </h2>
-        <div className="flex w-[85%] mx-auto gap-5  py-10 px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto gap-5  py-10 px-0">
           {Contacts?.data?.map((contact: ContactI) => {
             return (
               <div className="text-center bg-gray-50 rounded-lg flex flex-col gap-3 py-10 px-5">

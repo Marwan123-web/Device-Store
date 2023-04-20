@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import FetchHook from "../../hooks/FetchHook";
 import { ProductI } from "../../models/products.interface";
+import Button from "../Shared/Button";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -80,12 +81,7 @@ const ProductDetails = () => {
               <span>{product?.rating.slice(3)}</span>
             </span>
           </h3>
-          <button
-            onClick={() => console.log("ksk")}
-            className="bg-sky-500 text-sky-50 px-2 py-1 mt-4"
-          >
-            add to cart
-          </button>
+          <Button label={'add to cart'} classes={"bg-sky-500 text-sky-50 px-2 py-1 mt-4"} ButtonFun={() => console.log("ksk")}/>
         </div>
       </div>
       <Link

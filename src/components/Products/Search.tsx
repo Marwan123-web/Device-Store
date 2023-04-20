@@ -88,7 +88,7 @@ const Search = () => {
             {<Link to="/">Home </Link>}/
             <span className="text-sky-400 px-1">{catPath}</span>
           </p>
-          <div className="grid grid-cols-3 gap-10 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
             {filterProducts &&
               filterProducts.map((product: ProductI) => (
                 <SingleProduct key={product.id} product={product} />

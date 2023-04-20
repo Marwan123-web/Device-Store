@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ProductI } from "../../models/products.interface";
+import Button from "../Shared/Button";
 
 const SingleProduct = ({ product }: { product: ProductI }) => {
   const { img, title, brand, price } = product;
@@ -33,16 +34,10 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
           state={product}
           className="hover:text-rose-50 text-gray-900 duration-300 flex justify-between items-center"
         >
-          <button className="text-sky-400 px-2 py-1 border border-sky-400 rounded-md hover:bg-sky-400 hover:text-sky-50 duration-300">
-            More Info
-          </button>
+          <Button label={'More Info'} classes={"text-sky-400 px-2 py-1 border border-sky-400 rounded-md hover:bg-sky-400 hover:text-sky-50 duration-300"}/>
         </Link>
-        <button
-          onClick={() => console.log("ksk")}
-          className="bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md"
-        >
-          add to cart
-        </button>
+        <Button label={'add to cart'} classes={"bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md"} ButtonFun={() => console.log("ksk")}/>
+
       </div>
     </div>
   );

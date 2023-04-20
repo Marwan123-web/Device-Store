@@ -7,7 +7,7 @@ const About = () => {
     <>
       <Herotext text="About Us" />
       <section className=" bg-gray-50 py-20 px-20 ">
-        <div className="container mx-auto grid grid-cols-2">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col justify-center">
             <div className="flex flex-col gap-3">
               <h1 className="text-6xl font-semibold text-gray-700">

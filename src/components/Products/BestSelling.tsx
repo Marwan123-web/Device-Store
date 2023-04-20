@@ -11,7 +11,7 @@ const BestSelling = () => {
       <h2 className="text-4xl py-10 text-center font-medium text-gray-700">
         Best Selling Products
       </h2>
-      <div className="grid grid-cols-3 gap-10 w-[80%] mx-auto pb-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-[80%] mx-auto pb-20">
         {products?.data
           ?.filter((product: ProductI) => +product?.id <= 6)
           .map((product: ProductI) => {
