@@ -4,12 +4,14 @@ import { SlideI } from "../../models/slide.interface";
 import Slide from "./Slide";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Button from "../Shared/Button";
+import { useTranslation } from "react-i18next";
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const id: string = "Slides";
 
   const sliders: any = FetchHook(id);
+  const { i18n } = useTranslation("common");
 
   const prevSlide = () => {
     setCurrentSlide(
@@ -30,7 +32,11 @@ const Slider = () => {
     <div className="frame relative overflow-x-hidden">
       <div
         className="slider relative "
-        style={{ transform: `translateX(-${100 * currentSlide}vw)` }}
+        style={{
+          transform: `translateX(${i18n.language === "en" ? "-" : ""}${
+            100 * currentSlide
+          }vw)`,
+        }}
       >
         {sliders?.data?.map((image: SlideI) => (
           <Slide image={image} key={image.id} />
@@ -45,7 +51,7 @@ const Slider = () => {
             ButtonFun={prevSlide}
           >
             <span>
-              <BsArrowLeft />
+              {i18n.language === "en" ? <BsArrowLeft /> : <BsArrowRight />}
             </span>
           </Button>
 
@@ -56,7 +62,7 @@ const Slider = () => {
             ButtonFun={nextSlide}
           >
             <span>
-              <BsArrowRight />
+              {i18n.language === "en" ? <BsArrowRight /> : <BsArrowLeft />}
             </span>
           </Button>
         </div>

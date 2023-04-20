@@ -9,11 +9,18 @@ import DetailsPage from "./pages/DetailsPage";
 import Home from "./pages/Home";
 import Notfound from "./pages/Notfound";
 import Product from "./pages/Product";
-
+import { useTranslation } from "react-i18next";
 function App() {
+  const { i18n } = useTranslation();
+
+  const changeLang = () => {
+    localStorage.setItem("lang", i18n.language == "en" ? "ar" : "en");
+    i18n.changeLanguage(i18n.language == "en" ? "ar" : "en");
+  };
+
   return (
-    <section>
-      <NavBar />
+    <section dir={i18n.language == "en" ? "ltr" : "rtl"}>
+      <NavBar changeLangFun={changeLang} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

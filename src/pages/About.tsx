@@ -1,8 +1,10 @@
 import Herotext from "../components/Shared/Herotext";
 import OurTeam from "../components/US/OurTeam";
 import WhyUs from "../components/US/WhyUs";
+import { useTranslation } from "react-i18next";
 
 const About = () => {
+  const { t } = useTranslation("common");
   return (
     <>
       <Herotext text="About Us" />
@@ -11,28 +13,17 @@ const About = () => {
           <div className="flex flex-col justify-center">
             <div className="flex flex-col gap-3">
               <h1 className="text-6xl font-semibold text-gray-700">
-                Who we are?
+                {t("Who we are?")}
               </h1>
-              <p className="text-lg text-gray-700">
-                We are a team of passionate individuals committed to providing
-                high-quality products and exceptional customer service. Our
-                mission is to make technology accessible to everyone, no matter
-                where they are in the world. Shop with us and experience the
-                difference of working with a dedicated and customer-centric
-                team.
-              </p>
+              <p className="text-lg text-gray-700">{t("desctext")}</p>
             </div>
           </div>
           <div>
-            <img
-              className="w-[80%] mx-auto"
-              src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-              alt="team img"
-            />
+            <img className="w-[80%] mx-auto aboutImg" alt="team img" />
           </div>
         </div>
       </section>
-      <OurTeam />
+      {/* <OurTeam /> */}
       <WhyUs />
     </>
   );

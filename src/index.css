@@ -75,3 +75,27 @@ main {
   position: relative;
   inset: auto 0 0;
 }
+
+.lang-btn {
+  cursor: pointer;
+}
+
+.slide1 {
+  background-image: url("./asstes/images/slide1.webp");
+}
+.slide2 {
+  background-image: url("./asstes/images/slide2.avif");
+}
+.slide3 {
+  background-image: url("./asstes/images/slide3.avif");
+}
+.slide4 {
+  background-image: url("./asstes/images/slide4.avif");
+}
+.slide5 {
+  background-image: url("./asstes/images/slide5.avif");
+}
+
+.aboutImg {
+  content: url("./asstes/images/aboutImg.avif");
+}

@@ -4,15 +4,37 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
+import i18next from "i18next";
+import common_ar from "./asstes/local/ar/common.json";
+import common_en from "./asstes/local/en/common.json";
+import { Suspense } from "react";
+
+i18next.init({
+  interpolation: { escapeValue: false }, // React already does escaping
+  lng: localStorage.getItem("lang") || "en", // default language
+  resources: {
+    en: {
+      common: common_en,
+    },
+    ar: {
+      common: common_ar,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <I18nextProvider i18n={i18next}>
+      <BrowserRouter>
+        <Suspense fallback="...loading">
+          <App />
+        </Suspense>
+      </BrowserRouter>
+    </I18nextProvider>
   </React.StrictMode>
 );
 

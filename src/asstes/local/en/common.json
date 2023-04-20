@@ -1,0 +1,66 @@
+{
+  "Navbar": {
+    "ar": "Arabic",
+    "en": "English",
+    "Home": "Home",
+    "About": "About",
+    "Product": "Product",
+    "Contact": "Contact",
+    "Cart": "Cart",
+    "Products": "Products"
+  },
+  "Who we are?": "Who we are?",
+
+  "desctext": "We are a team of passionate individuals committed to providing high-quality products and exceptional customer service. Our mission is to make technology accessible to everyone, no matter where they are in the world. Shop with us and experience the difference of working with a dedicated and customer-centric team.",
+  "Why Choose Us": "Why Choose Us",
+  "Secure Payments": "Secure Payments",
+  "Secure Payments text": "We offer a range of secure payment options to ensure that your transactions are safe and secure.",
+  "Best Offers": "Best Offers",
+  "Best Offers text": "We pride ourselves on offering the best deals and discounts to our customers.",
+
+  "Best Quality": "Best Quality",
+  "Best Quality text": "We believe in providing our customers with only the best quality products.",
+
+  "Worldwide Shipping": "Worldwide Shipping",
+  "Worldwide Shipping text": "We offer worldwide shipping to make our products accessible to customers all over the world.",
+
+  "About Us": "About Us",
+  "All Products": "All Products",
+  "We're here to help you": "We're here to help you",
+  "Sales": "Sales",
+  "Sales text": " Expert sales assistance for all customers. Our sales team is dedicated to providing expert guidance to customers",
+  "Complaints": "Complaints",
+  "Complaints text": "We take customer satisfaction seriously and strive to address any complaints in a timely and efficient manner",
+  "Returns": "Returns",
+  "Returns text": "Hassle-free returns and exchanges. We understand that sometimes products just don't work out.",
+  "Marketing": "Marketing",
+  "Marketing text": "Our marketing team works collaboratively with businesses to help them grow and succeed",
+  "number": "xxxx 123 4567",
+  "Contact us": "Contact us",
+  "Cart Page": "Cart Page",
+  "add to cart": "add to cart",
+  "More info": "More Info",
+
+  "slides": {
+    "headline1": "Power and Portability at your Fingertips",
+    "body1": "Discover our wide range of laptops for all your computing needs. From ultrabooks to gaming laptops, our selection offers the perfect combination of power and portability for your lifestyle.",
+    "category1": "laptop",
+
+    "headline2": "Stay Connected on the Go",
+    "body2": "Keep up with the latest trends and stay connected on-the-go with our selection of smartphones. Choose from top brands and affordable options, with advanced features to enhance your mobile experience.",
+    "category2": "smartphone",
+
+    "headline3": "Track your Fitness and Stay Connected",
+    "body3": "Enhance your lifestyle with our range of smartwatches. Monitor your fitness goals and stay connected to your digital life with ease. Choose from popular brands and a variety of styles and features.",
+    "category3": "smartwatch",
+
+    "headline4": "The Ultimate Gaming Experience",
+    "body4": "Take your gaming experience to the next level with our high-performance graphics cards. Choose from top brands and the latest technology for smooth and fast gameplay.",
+    "category4": "graphics card",
+
+    "headline5": "Listen in Style and Comfort",
+    "body5": "Elevate your audio experience with our selection of earbuds and headphones. Choose from the latest models and top brands, with noise-cancelling and wireless options for a customized listening experience.",
+    "category5": "earbuds",
+    "cta": "Shop now"
+  }
+}
