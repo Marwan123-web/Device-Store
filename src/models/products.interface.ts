@@ -7,6 +7,7 @@ export interface ProductI {
   price: string;
   rating: string;
   title: string;
+  quantity: number;
 }
 
 export interface ProductsI {

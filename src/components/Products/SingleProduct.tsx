@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
 import { ProductI } from "../../models/products.interface";
 import Button from "../Shared/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, editItem } from "../../redux/cart/slice";
 
 const SingleProduct = ({ product }: { product: ProductI }) => {
+  const dispatch = useDispatch();
   const { img, title, brand, price } = product;
+  const cart = useSelector((state: any) => state.cart.items);
+
+  let foundInCart = cart.find(
+    (cartproduct: ProductI) => cartproduct?.id === product?.id
+  );
   return (
     <div className="single-product flex flex-col bg-gray-50 gap-3 shadow-md hover:shadow-xl hover:scale-105 duration-300 px-4 py-7 rounded-sm overflow-hidden">
       <div className="flex justify-center">
@@ -34,10 +42,55 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
           state={product}
           className="hover:text-rose-50 text-gray-900 duration-300 flex justify-between items-center"
         >
-          <Button label={'More Info'} classes={"text-sky-400 px-2 py-1 border border-sky-400 rounded-md hover:bg-sky-400 hover:text-sky-50 duration-300"}/>
+          <Button
+            label={"More Info"}
+            classes={
+              "text-sky-400 px-2 py-1 border border-sky-400 rounded-md hover:bg-sky-400 hover:text-sky-50 duration-300"
+            }
+          />
         </Link>
-        <Button label={'add to cart'} classes={"bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md"} ButtonFun={() => console.log("ksk")}/>
-
+        {!foundInCart && (
+          <Button
+            ButtonFun={() => dispatch(addItem(product as any))}
+            label={"add to cart"}
+            classes={
+              "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md"
+            }
+          />
+        )}
+        {foundInCart && (
+          <div className="counter">
+            <Button
+              label={"-"}
+              classes={
+                "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md mx-3"
+              }
+              ButtonFun={() =>
+                dispatch(
+                  editItem({
+                    ...product,
+                    method: "remove",
+                  } as any)
+                )
+              }
+            />
+            <span>{foundInCart?.quantity}</span>
+            <Button
+              label={"+"}
+              classes={
+                "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md mx-3"
+              }
+              ButtonFun={() =>
+                dispatch(
+                  editItem({
+                    ...product,
+                    method: "add",
+                  } as any)
+                )
+              }
+            />
+          </div>
+        )}
       </div>
     </div>
   );

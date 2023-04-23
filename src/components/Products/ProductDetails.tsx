@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import FetchHook from "../../hooks/FetchHook";
 import { ProductI } from "../../models/products.interface";
 import Button from "../Shared/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, editItem } from "../../redux/cart/slice";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -24,7 +26,13 @@ const ProductDetails = () => {
       setIsLoading(false);
       setErr("Something went wrong");
     }
-  }, [response]);
+  }, [response, params.id]);
+  const cart = useSelector((state: any) => state.cart.items);
+  const dispatch = useDispatch();
+
+  let foundInCart = cart.find(
+    (cartproduct: ProductI) => cartproduct?.id === product?.id
+  );
   if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
@@ -81,7 +89,48 @@ const ProductDetails = () => {
               <span>{product?.rating.slice(3)}</span>
             </span>
           </h3>
-          <Button label={'add to cart'} classes={"bg-sky-500 text-sky-50 px-2 py-1 mt-4"} ButtonFun={() => console.log("ksk")}/>
+          {!foundInCart && (
+            <Button
+              ButtonFun={() => dispatch(addItem(product as any))}
+              label={"add to cart"}
+              classes={
+                "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md"
+              }
+            />
+          )}
+          {foundInCart && (
+            <div className="counter">
+              <Button
+                label={"-"}
+                classes={
+                  "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md mx-3"
+                }
+                ButtonFun={() =>
+                  dispatch(
+                    editItem({
+                      ...product,
+                      method: "remove",
+                    } as any)
+                  )
+                }
+              />
+              <span>{foundInCart?.quantity}</span>
+              <Button
+                label={"+"}
+                classes={
+                  "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md mx-3"
+                }
+                ButtonFun={() =>
+                  dispatch(
+                    editItem({
+                      ...product,
+                      method: "add",
+                    } as any)
+                  )
+                }
+              />
+            </div>
+          )}{" "}
         </div>
       </div>
       <Link

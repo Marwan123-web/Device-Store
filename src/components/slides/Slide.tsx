@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 const Slide = ({ image }: { image: SlideI }) => {
   const { t } = useTranslation("common");
-  console.log("image?.src", image?.src);
 
   return (
     <div
