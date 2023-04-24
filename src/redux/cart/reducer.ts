@@ -32,4 +32,11 @@ export const cartReducers = {
     );
     localStorageMethods.updateItem("cart", state.items);
   },
+  calcTotal: (state: any) => {
+    let total = 0;
+    state.items.forEach((item: any) => {
+      total = total + parseInt(item.price) * item.quantity;
+    });
+    state.total = total;
+  },
 };
