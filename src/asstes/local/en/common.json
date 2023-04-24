@@ -62,5 +62,21 @@
     "body5": "Elevate your audio experience with our selection of earbuds and headphones. Choose from the latest models and top brands, with noise-cancelling and wireless options for a customized listening experience.",
     "category5": "earbuds",
     "cta": "Shop now"
-  }
+  },
+  "shoppingCart": "Shopping Cart",
+  "productDetails": "PRODUCT DETAILS",
+  "quantity": "QUANTITY",
+  "price": "PRICE",
+  "total": "TOTAL",
+  "items": "ITEMS",
+  "shipping": "SHIPPING",
+  "promoCode": "PROMO CODE",
+  "totalCost": "TOTAL COST",
+  "continueShopping": "Continue Shopping",
+  "remove": "Remove",
+  "orderSummary": "Order Summary",
+  "apply": "APPLY",
+  "standardShipping-$10.00": "Standard shipping - $10.00",
+  "fastShipping-$20.00": "Fast shipping - $20.00",
+  "checkout": "Checkout"
 }
