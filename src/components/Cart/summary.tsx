@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { calcTotal } from "../../redux/cart/slice";
+import Input from "../Shared/Input";
 const Summary = () => {
   const { t } = useTranslation("common");
 
@@ -12,7 +13,7 @@ const Summary = () => {
   }, [cart, dispatch]);
   const [shippingMethod, setShippingMethod] = useState(10);
   return (
-    <div id="summary" className="w-1/4 px-8 py-10">
+    <div id="summary" className="w-1/4 px-8 py-10 bg-gray-300">
       <h1 className="font-semibold text-2xl border-b pb-8">
         {t("orderSummary")}
       </h1>
@@ -36,12 +37,21 @@ const Summary = () => {
         </select>
       </div>
       <div className="py-10">
-        <label
-          htmlFor="promo"
-          className="font-semibold inline-block mb-3 text-sm uppercase"
-        >
-          {t("promoCode")}
-        </label>
+        <Input
+          children={
+            <label
+              htmlFor="promo"
+              className="font-semibold inline-block mb-3 text-sm uppercase"
+            >
+              {t("promoCode")}
+            </label>
+          }
+          id="promo"
+          name="promo"
+          type="text"
+          placeholder="Enter your code"
+          classes="p-2 text-sm w-full"
+        />
         {/* <input type="text" id="promo" placeholder="Enter your code" className="p-2 text-sm w-full"> */}
       </div>
       <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">

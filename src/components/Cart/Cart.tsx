@@ -14,13 +14,12 @@ const Cart = () => {
   if (!cart.length) {
     return (
       <section>
-        <Herotext text={"Cart Page"} bg={"cartbg"} />
+        <Herotext text={"emptyCartPage"} bg={"cartbg"} />
       </section>
     );
   }
   return (
     <section>
-      <Herotext text={"Cart Page"} bg={"cartbg"} />
       <div className="container mx-auto mt-10">
         <div className="flex shadow-md my-10">
           <div className="w-3/4 bg-white px-10 py-10">
@@ -70,7 +69,7 @@ const Cart = () => {
                     </span>
                   </div>
                 </div>
-                <div className="flex justify-center w-1/5">
+                <div className="flex justify-center items-center w-1/5">
                   <Button
                     label={"-"}
                     classes={

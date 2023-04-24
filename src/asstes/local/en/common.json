@@ -78,5 +78,6 @@
   "apply": "APPLY",
   "standardShipping-$10.00": "Standard shipping - $10.00",
   "fastShipping-$20.00": "Fast shipping - $20.00",
-  "checkout": "Checkout"
+  "checkout": "Checkout",
+  "emptyCartPage": "Empty Cart Page"
 }
