@@ -53,8 +53,8 @@ const Search = () => {
   return (
     <div className="container mx-auto pb-20">
       <h2 className="text-center text-3xl py-10">All Products</h2>
-      <div className="flex justify-between gap-10">
-        <div className="w-[20%] bg-gray-50 flex flex-col gap-3 px-3 pt-2">
+      <div className="flex lg:justify-between justify-center gap-10 flex-wrap">
+        <div className="lg:w-[20%] w-[80%] bg-gray-50 flex flex-col gap-3 px-3 pt-2">
           <h3
             className="select-none cursor-pointer flex justify-between"
             onClick={() => {

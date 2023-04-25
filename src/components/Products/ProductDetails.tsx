@@ -41,7 +41,7 @@ const ProductDetails = () => {
     );
   return (
     <section className="flex flex-col gap-16 py-10 bg-gray-100">
-      <div className="container mx-auto flex justify-around  items-center w-[80%]">
+      <div className="container mx-auto flex justify-around  items-center w-[80%] lg:flex-nowrap flex-wrap">
         <div className="w-96 flex justify-end">
           <img
             src={product?.img}
@@ -99,7 +99,7 @@ const ProductDetails = () => {
             />
           )}
           {foundInCart && (
-            <div className="counter">
+            <div className="counter text-center">
               <Button
                 label={"-"}
                 classes={

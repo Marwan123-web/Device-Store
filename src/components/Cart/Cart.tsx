@@ -21,8 +21,8 @@ const Cart = () => {
   return (
     <section>
       <div className="container mx-auto mt-10">
-        <div className="flex shadow-md my-10">
-          <div className="w-3/4 bg-white px-10 py-10">
+        <div className="flex shadow-md my-10 flex-wrap">
+          <div className="lg:w-3/4 w-[100] bg-white px-10 py-10">
             <div className="flex justify-between border-b pb-8">
               <h1 className="font-semibold text-2xl">{t("shoppingCart")}</h1>
               <h2 className="font-semibold text-2xl">
@@ -54,8 +54,8 @@ const Cart = () => {
                       <img className="h-24" src={item.img} alt="" />
                     </Link>
                   </div>
-                  <div className="flex flex-col justify-between ml-4 flex-grow">
-                    <span className="font-bold text-sm">
+                  <div className="flex flex-col justify-between lg:ml-4 ml-2 flex-grow">
+                    <span className="font-bold lg:text-sm text-xs">
                       <Link to={"/product/" + item.title}>{item.title}</Link>
                     </span>
                     <span className="text-red-500 text-xs">
@@ -69,7 +69,7 @@ const Cart = () => {
                     </span>
                   </div>
                 </div>
-                <div className="flex justify-center items-center w-1/5">
+                <div className="flex justify-center items-center w-1/5 lg:flex-row flex-col">
                   <Button
                     label={"-"}
                     classes={

@@ -13,7 +13,7 @@ const Summary = () => {
   }, [cart, dispatch]);
   const [shippingMethod, setShippingMethod] = useState(10);
   return (
-    <div id="summary" className="w-1/4 px-8 py-10 bg-gray-300">
+    <div id="summary" className="lg:w-1/4 w-[100] px-8 py-10 bg-gray-300">
       <h1 className="font-semibold text-2xl border-b pb-8">
         {t("orderSummary")}
       </h1>

@@ -12,7 +12,7 @@ const About = () => {
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col justify-center">
             <div className="flex flex-col gap-3">
-              <h1 className="text-6xl font-semibold text-gray-700">
+              <h1 className="lg:text-6xl text-4xl font-semibold text-gray-700">
                 {t("Who we are?")}
               </h1>
               <p className="text-lg text-gray-700">{t("desctext")}</p>

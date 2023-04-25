@@ -59,7 +59,7 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
           />
         )}
         {foundInCart && (
-          <div className="counter">
+          <div className="counter text-center">
             <Button
               label={"-"}
               classes={

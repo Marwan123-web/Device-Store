@@ -9,7 +9,9 @@ const Herotext = ({ text, bg }: { text: string; bg?: string }) => {
         bg ? bg : "herobg"
       }`}
     >
-      <h1 className="text-6xl font-semibold text-gray-50">{t(text)}</h1>
+      <h1 className="lg:text-6xl text-4xl font-semibold text-gray-50">
+        {t(text)}
+      </h1>
     </section>
   );
 };
