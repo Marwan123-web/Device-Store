@@ -2,8 +2,7 @@ import { localStorageMethods } from "../../localStorage/LocalStorage";
 
 export const cartReducers = {
   addItem: (state: any, action: any) => {
-    action.payload.quantity = 1;
-    state.items.push(action.payload);
+    state.items.push({ ...action.payload, quantity: 1 });
     localStorageMethods.updateItem("cart", state.items);
   },
   editItem: (state: any, action: any) => {
@@ -28,7 +27,7 @@ export const cartReducers = {
   },
   deleteItem: (state: any, action: any) => {
     state.items = state.items.filter(
-      (cart: any) => cart.id !== action.payload.id
+      (item: any) => item.id !== action.payload.id
     );
     localStorageMethods.updateItem("cart", state.items);
   },
