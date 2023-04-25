@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import "flowbite";
 import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import About from "./pages/About";
@@ -14,12 +15,12 @@ function App() {
   const { i18n } = useTranslation();
 
   const changeLang = () => {
-    localStorage.setItem("lang", i18n.language == "en" ? "ar" : "en");
-    i18n.changeLanguage(i18n.language == "en" ? "ar" : "en");
+    localStorage.setItem("lang", i18n.language === "en" ? "ar" : "en");
+    i18n.changeLanguage(i18n.language === "en" ? "ar" : "en");
   };
 
   return (
-    <section dir={i18n.language == "en" ? "ltr" : "rtl"}>
+    <section dir={i18n.language === "en" ? "ltr" : "rtl"}>
       <NavBar changeLangFun={changeLang} />
       <main>
         <Routes>
