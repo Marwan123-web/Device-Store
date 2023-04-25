@@ -8,7 +8,7 @@ const NavBar = ({ changeLangFun }: { changeLangFun: Function }) => {
   const navs: any = FetchHook(id);
   const { t, i18n } = useTranslation("common");
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-10 top-0">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="/" className="text-gray-700 italic text-7xl">
           DS

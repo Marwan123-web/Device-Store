@@ -99,3 +99,7 @@ main {
 .aboutImg {
   content: url("./asstes/images/aboutImg.avif");
 }
+
+.main-padding {
+  padding-top: 105px;
+}

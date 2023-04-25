@@ -22,7 +22,7 @@ function App() {
   return (
     <section dir={i18n.language === "en" ? "ltr" : "rtl"}>
       <NavBar changeLangFun={changeLang} />
-      <main>
+      <main className="main-padding">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
