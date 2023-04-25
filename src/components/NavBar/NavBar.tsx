@@ -36,7 +36,7 @@ const NavBar = ({ changeLangFun }: { changeLangFun: Function }) => {
           </svg>
         </button>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-medium flex flex-col gap-3 items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="font-medium flex flex-col gap-5 items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {navs?.data?.map((nav: LocalDataDI) => (
               <li key={nav.id}>
                 <NavLink to={nav?.url}>
@@ -45,9 +45,9 @@ const NavBar = ({ changeLangFun }: { changeLangFun: Function }) => {
               </li>
             ))}
             <li onClick={() => changeLangFun()}>
-              <a className="lang-btn">
+              <span className="lang-btn">
                 {i18n.language === "en" ? t("Navbar.ar") : t("Navbar.en")}
-              </a>
+              </span>
             </li>
           </ul>
         </div>
