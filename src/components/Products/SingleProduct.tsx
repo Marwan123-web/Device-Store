@@ -15,11 +15,13 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
   return (
     <div className="single-product flex flex-col bg-gray-50 gap-3 shadow-md hover:shadow-xl hover:scale-105 duration-300 px-4 py-7 rounded-sm overflow-hidden">
       <div className="flex justify-center">
-        <img
-          className="w-72 h-48 object-contain hover:scale-110 duration-500"
-          src={img}
-          alt={title}
-        />
+        <Link to={title}>
+          <img
+            className="w-72 h-48 object-contain hover:scale-110 duration-500"
+            src={img}
+            alt={title}
+          />
+        </Link>
       </div>
       <Link
         to={title}
