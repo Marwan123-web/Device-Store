@@ -1,12 +1,24 @@
-import FetchHook from "../../hooks/FetchHook";
+import useFetch from "../../hooks/useFetch";
 import { Link, NavLink } from "react-router-dom";
 import { LocalDataDI } from "../../models/localData.interface";
 import { FaShoppingCart } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 const NavBar = ({ changeLangFun }: { changeLangFun: Function }) => {
   const id: any = "Navbar";
-  const navs: any = FetchHook(id);
+  const {
+    data: navs,
+    loading,
+    error,
+  } = useFetch({
+    id,
+  });
   const { t, i18n } = useTranslation("common");
+  if (loading)
+    return (
+      <p className="h-screen flex flex-col justify-center items-center text-2xl">
+        Loading...
+      </p>
+    );
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-10 top-0">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

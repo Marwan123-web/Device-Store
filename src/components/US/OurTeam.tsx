@@ -1,10 +1,22 @@
 import React from "react";
-import FetchHook from "../../hooks/FetchHook";
+import useFetch from "../../hooks/useFetch";
 import { TMemberI } from "../../models/teamMembers.interface";
 
 const OurTeam = () => {
   const id: any = "TeamMembers";
-  const teamMenbers: any = FetchHook(id);
+  const {
+    data: teamMenbers,
+    loading,
+    error,
+  } = useFetch({
+    id,
+  });
+  if (loading)
+    return (
+      <p className="h-screen flex flex-col justify-center items-center text-2xl">
+        Loading...
+      </p>
+    );
   return (
     <section className="bg-white py-20 ">
       <div className="w-[70%] mx-auto">

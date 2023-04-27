@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import FetchHook from "../../hooks/FetchHook";
+import useFetch from "../../hooks/useFetch";
 import { ProductI } from "../../models/products.interface";
 import Button from "../Shared/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,22 +10,24 @@ import Seo from "../Shared/Seo";
 const ProductDetails = () => {
   const params = useParams();
   const [product, setProduct] = useState<ProductI>();
-  const [isLoading, setIsLoading] = useState(true);
   const [err, setErr] = useState("");
   const id: any = "Products";
-  const response: any = FetchHook(id);
+  const {
+    data: response,
+    loading,
+    error,
+  } = useFetch({
+    id,
+  });
   useEffect(() => {
     if (response) {
       let product = response?.data?.find(
         (res: ProductI) => res?.id === params.id || res?.title === params.id
       );
-      setIsLoading(true);
-      setIsLoading(false);
       setProduct(product);
       setErr("");
     } else {
-      setIsLoading(false);
-      setErr("Something went wrong");
+      setErr(error);
     }
   }, [response, params.id]);
   const cart = useSelector((state: any) => state.cart.items);
@@ -34,7 +36,7 @@ const ProductDetails = () => {
   let foundInCart = cart.find(
     (cartproduct: ProductI) => cartproduct?.id === product?.id
   );
-  if (isLoading)
+  if (loading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import FetchHook from "../../hooks/FetchHook";
+import useFetch from "../../hooks/useFetch";
 import { ProductI } from "../../models/products.interface";
 import SingleProduct from "./SingleProduct";
 
 const Search = () => {
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [err, setErr] = useState("");
   const [catPath, setCatPath] = useState("all categories");
 
@@ -21,21 +20,24 @@ const Search = () => {
   ];
 
   const id: any = "Products";
-  const response: any = FetchHook(id);
+  const {
+    data: response,
+    loading,
+    error,
+  } = useFetch({
+    id,
+  });
   useEffect(() => {
     if (response) {
-      setIsLoading(true);
-      setIsLoading(false);
       setProducts(response?.data);
       setFilterProducts(response?.data);
       setErr("");
     } else {
-      setIsLoading(false);
-      setErr("Something went wrong");
+      setErr(error);
     }
   }, [response]);
 
-  if (isLoading)
+  if (loading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...

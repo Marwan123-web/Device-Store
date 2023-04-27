@@ -11,6 +11,7 @@ import common_en from "./asstes/local/en/common.json";
 import { Suspense } from "react";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import ScrollToTop from "./components/Shared/ScrollToTop";
 i18next.init({
   interpolation: { escapeValue: false }, // React already does escaping
   lng: localStorage.getItem("lang") || "en", // default language
@@ -33,6 +34,7 @@ root.render(
       <I18nextProvider i18n={i18next}>
         <BrowserRouter>
           <Suspense fallback="...loading">
+            <ScrollToTop />
             <App />
           </Suspense>
         </BrowserRouter>

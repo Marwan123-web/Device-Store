@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FetchHook from "../../hooks/FetchHook";
+import useFetch from "../../hooks/useFetch";
 import { SlideI } from "../../models/slide.interface";
 import Slide from "./Slide";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
@@ -10,7 +10,13 @@ const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const id: string = "Slides";
 
-  const sliders: any = FetchHook(id);
+  const {
+    data: sliders,
+    loading,
+    error,
+  } = useFetch({
+    id,
+  });
   const { i18n } = useTranslation("common");
 
   const prevSlide = () => {
@@ -28,6 +34,12 @@ const Slider = () => {
     );
   };
 
+  if (loading)
+    return (
+      <p className="h-screen flex flex-col justify-center items-center text-2xl">
+        Loading...
+      </p>
+    );
   return (
     <div className="frame relative overflow-x-hidden">
       <div
