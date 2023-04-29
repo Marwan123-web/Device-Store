@@ -8,7 +8,8 @@ React\
 Tailwind CSS\
 Redux/Toolkit State Management\
 i18next\
-flowbite
+flowbite\
+react-helmet
 
 # Getting Started with Create React App
 
