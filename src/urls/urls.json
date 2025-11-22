@@ -39,7 +39,7 @@
     ]
   },
   {
-    "type": "local",
+    "type": "external",
     "id": "Products",
     "name": "Products",
     "url": "",

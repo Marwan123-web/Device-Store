@@ -8,6 +8,7 @@ export interface ProductI {
   rating: string;
   title: string;
   quantity: number;
+  method?: string;
 }
 
 export interface ProductsI {

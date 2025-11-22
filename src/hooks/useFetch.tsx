@@ -1,50 +1,84 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import urls from "../urls/urls.json";
+import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
+import axios, { AxiosRequestConfig } from 'axios';
+import urls from '../urls/urls.json';
 
-const useFetch = ({
-  id,
-  url,
-  method,
-  body,
-  params,
-}: {
+interface UseFetchArgs {
   id?: string;
   url?: string;
-  method?: string;
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   body?: any;
-  params?: any;
-}) => {
-  const [data, setData] = useState<any>(null);
-  const [error, setError] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  useEffect(() => {
-    const objectData: any = urls.find((url: any) => url.id === id);
-    if (objectData?.type === "local") {
-      setData(objectData);
-    } else {
-      (async () => {
-        try {
-          setLoading(true);
-          const response: any = await axios({
-            method: method || "GET",
-            url: url,
-            ...(method !== "GET" && { data: body }),
-            params: params,
-          });
+  params?: Record<string, any>;
+  enabled?: boolean;
+}
 
-          setData(response.data);
-        } catch (err: any) {
-          setError(err);
-          console.log("ERROR:", err);
-        } finally {
-          setLoading(false);
-        }
-      })();
+const fetcher = async ({
+  url,
+  method = 'GET',
+  body,
+  params,
+}: UseFetchArgs) => {
+  if (!url) throw new Error('URL is required for fetching');
+
+  const token = (() => {
+    try {
+      const storedToken = localStorage.getItem('token');
+      return storedToken ? JSON.parse(storedToken) : '';
+    } catch (error) {
+      console.error('Error parsing token from localStorage', error);
+      return '';
     }
-  }, [url]);
+  })();
+  const config: AxiosRequestConfig = {
+    url,
+    method,
+    headers: {},
+    ...(method !== 'GET' && { data: body }),
+    params,
+  };
 
-  return { data, error, loading };
+  // Attach Authorization header if token exists
+  if (token) {
+    console.log('token',token);
+    
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
+  const response = await axios(config);
+  return response.data;
 };
 
-export default useFetch;
+export function useQueryFetch({
+  id,
+  url,
+  params = {},
+  enabled = true,
+}: Pick<UseFetchArgs, 'id' | 'url' | 'params' | 'enabled'>): UseQueryResult<any, any> {
+  const objectData: any = urls.find((item: any) => item.id === id);
+  const isLocal = objectData?.type === 'local';
+  const paramsKey = JSON.stringify(params);
+
+  return useQuery({
+    queryKey: [url || id || 'default', paramsKey],
+    queryFn: async () => {
+      if (isLocal) return objectData;
+      if (!url) throw new Error('URL is required for fetching');
+      return fetcher({ url, method: 'GET', params });
+    },
+    enabled: (!!url || isLocal) && enabled,
+    retry: false,
+  });
+}
+
+export function useMutationFetch({
+  url,
+  method = 'POST',
+}: Pick<UseFetchArgs, 'url' | 'method'>): UseMutationResult<any, any, any, unknown> {
+  if (!url) throw new Error('URL is required for mutation');
+
+  return useMutation({
+    mutationFn: (body: any) => fetcher({ url, method, body }),
+  });
+}

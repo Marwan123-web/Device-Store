@@ -1,5 +1,5 @@
 import React from "react";
-import useFetch from "../../hooks/useFetch";
+import {useQueryFetch} from "../../hooks/useFetch";
 import { ProductI } from "../../models/products.interface";
 import SingleProduct from "./SingleProduct";
 
@@ -7,12 +7,11 @@ const BestSelling = () => {
   const id: any = "Products";
   const {
     data: products,
-    loading,
-    error,
-  } = useFetch({
-    id,
+    isLoading,
+  } = useQueryFetch({
+    id, url: 'http://localhost:4000/api/products'
   });
-  if (loading)
+  if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...

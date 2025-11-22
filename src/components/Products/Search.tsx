@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import { useQueryFetch } from "../../hooks/useFetch";
 import { ProductI } from "../../models/products.interface";
 import SingleProduct from "./SingleProduct";
 
@@ -8,7 +8,7 @@ const Search = () => {
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [err, setErr] = useState("");
-  const [catPath, setCatPath] = useState("all categories");
+  const [catPath, setCatPath] = useState("");
 
   const categories = [
     "smartphone",
@@ -22,10 +22,16 @@ const Search = () => {
   const id: any = "Products";
   const {
     data: response,
-    loading,
+    isLoading,
     error,
-  } = useFetch({
+  } = useQueryFetch({
     id,
+    url: "http://localhost:4000/api/products",
+    ...(catPath && {
+      params: {
+        filter: JSON.stringify({ category: catPath }),
+      },
+    }),
   });
   useEffect(() => {
     if (response) {
@@ -33,11 +39,11 @@ const Search = () => {
       setFilterProducts(response?.data);
       setErr("");
     } else {
-      setErr(error);
+      setErr(error as any);
     }
-  }, [response]);
+  }, [response, catPath]);
 
-  if (loading)
+  if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...
@@ -55,34 +61,31 @@ const Search = () => {
   return (
     <div className="container mx-auto pb-20">
       <h2 className="text-center text-3xl py-10">All Products</h2>
-      <div className="flex lg:justify-between justify-center gap-10 flex-wrap">
+      <div className="flex lg:justify-between justify-center gap-10 flex-nowrap">
         <div className="lg:w-[20%] w-[80%] bg-gray-50 flex flex-col gap-3 px-3 pt-2">
           <h3
-            className="select-none cursor-pointer flex justify-between"
+            className={`select-none cursor-pointer flex justify-between ${!catPath ? 'text-sky-400' : ''}`}
+
             onClick={() => {
-              setFilterProducts(products);
-              setCatPath("all categories");
+              setCatPath("");
             }}
           >
             <span className="font-semibold">All Categories</span>
-            <span>{`(${products?.length})`}</span>
+            <span>{!catPath ? `(${products?.length})` : ""}</span>
           </h3>
           {categories?.map((cat, i) => (
-            <p
-              className="select-none cursor-pointer capitalize font-semibold"
+            <div
+            className={`select-none cursor-pointer flex justify-between ${catPath === cat ? 'text-sky-400' : ''}`}
               key={i}
               onClick={() => {
-                const filters = products.filter(
-                  (product: ProductI) => product.category === cat
-                );
-                setFilterProducts(filters);
                 setCatPath(categories[i]);
               }}
             >
+              <p className="cursor-pointer capitalize font-semibold">{cat}</p>
               <span>
-                {cat} {catPath === cat ? `(${filterProducts?.length})` : ""}
+                {catPath === cat ? `(${filterProducts?.length})` : ""}
               </span>
-            </p>
+            </div>
           ))}
         </div>
         <div>

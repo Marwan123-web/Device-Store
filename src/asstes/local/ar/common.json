@@ -6,7 +6,8 @@
     "About": "عن الشركه",
     "Product": "المنتجات",
     "Contact": "تواصل معنا",
-    "Cart": "عربه التسوق"
+    "Cart": "عربه التسوق",
+    "Login/Register":"تسجيل الدخول/التسجيل"
   },
   "Who we are?": "من نحن",
 
@@ -77,5 +78,22 @@
   "standardShipping-$10.00": "الشحن القياسي - 10.00 دولارًا ",
   "fastShipping-$20.00": "شحن سريع - 20.00 دولارًا",
   "checkout": "اتمام الشراء",
-  "emptyCartPage": "العربه فارغه"
+  "emptyCartPage": "العربه فارغه",
+  "auth": {
+    "title": "تسجيل الدخول إلى حسابك﻿",
+    "email": "عنوان البريد الإلكتروني﻿",
+    "name": "الاسم الكامل﻿",
+    "password": "كلمة المرور﻿",
+    "forgotPassword": "هل نسيت كلمة المرور؟﻿",
+    "signIn": "تسجيل الدخول﻿",
+    "register": "تسجيل﻿",
+    "registerNow": "سجل الآن﻿",
+    "noAMember": "لست عضواً؟﻿",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟﻿",
+    "signingIn": "جارٍ تسجيل الدخول﻿",
+    "registering": "جارٍ التسجيل﻿",
+    "loginFailed": "فشل تسجيل الدخول﻿",
+    "welcomeBack": "مرحباً بعودتك﻿",
+    "welcome": "مرحباً﻿"
+    }
 }

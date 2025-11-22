@@ -1,11 +1,12 @@
 import { localStorageMethods } from "../../localStorage/LocalStorage";
+import { ProductI } from "../../models/products.interface";
 
 export const cartReducers = {
-  addItem: (state: any, action: any) => {
+  addItem: (state: any, action: { payload: ProductI }) => {
     state.items.push({ ...action.payload, quantity: 1 });
     localStorageMethods.updateItem("cart", state.items);
   },
-  editItem: (state: any, action: any) => {
+  editItem: (state: any, action: { payload: ProductI }) => {
     let index = state.items.findIndex(
       (cart: any) => cart?.id === action?.payload?.id
     );

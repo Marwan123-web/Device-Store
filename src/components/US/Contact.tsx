@@ -1,5 +1,5 @@
 import React from "react";
-import useFetch from "../../hooks/useFetch";
+import {useQueryFetch} from "../../hooks/useFetch";
 import { ContactI } from "../../models/Contact.interface";
 import Herotext from "../Shared/Herotext";
 import { useTranslation } from "react-i18next";
@@ -8,14 +8,13 @@ const Contact = () => {
   const id: any = "ContactUs";
   const {
     data: Contacts,
-    loading,
-    error,
-  } = useFetch({
+    isLoading,
+  } = useQueryFetch({
     id,
   });
   const { t } = useTranslation("common");
 
-  if (loading)
+  if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...

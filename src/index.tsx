@@ -12,6 +12,8 @@ import { Suspense } from "react";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import ScrollToTop from "./components/Shared/ScrollToTop";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 i18next.init({
   interpolation: { escapeValue: false }, // React already does escaping
   lng: localStorage.getItem("lang") || "en", // default language
@@ -28,18 +30,22 @@ i18next.init({
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <I18nextProvider i18n={i18next}>
-        <BrowserRouter>
-          <Suspense fallback="...loading">
-            <ScrollToTop />
-            <App />
-          </Suspense>
-        </BrowserRouter>
-      </I18nextProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <I18nextProvider i18n={i18next}>
+          <BrowserRouter>
+            <Suspense fallback="...loading">
+              <ScrollToTop />
+              <App />
+              <ToastContainer />
+            </Suspense>
+          </BrowserRouter>
+        </I18nextProvider>
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

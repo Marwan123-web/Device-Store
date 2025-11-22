@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import {useQueryFetch} from "../../hooks/useFetch";
 import { ProductI } from "../../models/products.interface";
 import Button from "../Shared/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,9 +14,9 @@ const ProductDetails = () => {
   const id: any = "Products";
   const {
     data: response,
-    loading,
+    isLoading,
     error,
-  } = useFetch({
+  } = useQueryFetch({
     id,
   });
   useEffect(() => {
@@ -27,7 +27,7 @@ const ProductDetails = () => {
       setProduct(product);
       setErr("");
     } else {
-      setErr(error);
+      setErr(error as any);
     }
   }, [response, params.id]);
   const cart = useSelector((state: any) => state.cart.items);
@@ -36,7 +36,7 @@ const ProductDetails = () => {
   let foundInCart = cart.find(
     (cartproduct: ProductI) => cartproduct?.id === product?.id
   );
-  if (loading)
+  if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...

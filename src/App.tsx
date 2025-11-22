@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import "flowbite";
 import Footer from "./components/Footer/Footer";
@@ -11,6 +11,9 @@ import Home from "./pages/Home";
 import Notfound from "./pages/Notfound";
 import Product from "./pages/Product";
 import { useTranslation } from "react-i18next";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import Profile from "./components/Auth/Profile";
 function App() {
   const { i18n } = useTranslation();
 
@@ -19,9 +22,16 @@ function App() {
     i18n.changeLanguage(i18n.language === "en" ? "ar" : "en");
   };
 
+  const location = useLocation();
+
+  const excludedRoutes = ['/login', '/register']; // routes to hide header/footer
+
+  const shouldShowHeaderFooter = !excludedRoutes.includes(location.pathname);
+
+  const user = localStorage.getItem('user');
   return (
     <section dir={i18n.language === "en" ? "ltr" : "rtl"}>
-      <NavBar changeLangFun={changeLang} />
+      { shouldShowHeaderFooter && <NavBar changeLangFun={changeLang} /> }
       <main className="main-padding">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -31,10 +41,14 @@ function App() {
           <Route path="/:id" element={<DetailsPage />} />
           <Route path="/product/:id" element={<DetailsPage />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="*" element={<Notfound />} />
+          <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
+          <Route path="/register" element={user ? <Navigate to="/" replace /> : <Register /> } />
+          <Route path="/profile" element={!user ? <Navigate to="/login" replace /> : <Profile />} />
+          <Route path="/404" element={<Notfound />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </main>
-      <Footer />
+      { shouldShowHeaderFooter && <Footer /> }
     </section>
   );
 }

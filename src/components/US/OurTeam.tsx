@@ -1,17 +1,16 @@
 import React from "react";
-import useFetch from "../../hooks/useFetch";
 import { TMemberI } from "../../models/teamMembers.interface";
+import { useQueryFetch } from "../../hooks/useFetch";
 
 const OurTeam = () => {
   const id: any = "TeamMembers";
   const {
     data: teamMenbers,
-    loading,
-    error,
-  } = useFetch({
+    isLoading,
+  } = useQueryFetch({
     id,
   });
-  if (loading)
+  if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...

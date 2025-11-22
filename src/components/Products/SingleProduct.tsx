@@ -53,7 +53,7 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
         </Link>
         {!foundInCart && (
           <Button
-            ButtonFun={() => dispatch(addItem(product as any))}
+            ButtonFun={() => dispatch(addItem(product))}
             label={"add to cart"}
             classes={
               "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md"
@@ -72,7 +72,7 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
                   editItem({
                     ...product,
                     method: "remove",
-                  } as any)
+                  })
                 )
               }
             />
@@ -87,7 +87,7 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
                   editItem({
                     ...product,
                     method: "add",
-                  } as any)
+                  })
                 )
               }
             />

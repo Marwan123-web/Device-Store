@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useFetch from "../../hooks/useFetch";
+import {useQueryFetch} from "../../hooks/useFetch";
 import { SlideI } from "../../models/slide.interface";
 import Slide from "./Slide";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
@@ -12,9 +12,8 @@ const Slider = () => {
 
   const {
     data: sliders,
-    loading,
-    error,
-  } = useFetch({
+    isLoading,
+  } = useQueryFetch({
     id,
   });
   const { i18n } = useTranslation("common");
@@ -34,7 +33,7 @@ const Slider = () => {
     );
   };
 
-  if (loading)
+  if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...

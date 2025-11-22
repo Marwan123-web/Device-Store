@@ -7,7 +7,8 @@
     "Product": "Product",
     "Contact": "Contact",
     "Cart": "Cart",
-    "Products": "Products"
+    "Products": "Products",
+    "Login/Register":"Login/Register"
   },
   "Who we are?": "Who we are?",
 
@@ -79,5 +80,22 @@
   "standardShipping-$10.00": "Standard shipping - $10.00",
   "fastShipping-$20.00": "Fast shipping - $20.00",
   "checkout": "Checkout",
-  "emptyCartPage": "Empty Cart Page"
+  "emptyCartPage": "Empty Cart Page",
+  "auth": {
+    "title": "Sign in to your account",
+    "email": "Email address",
+    "name":"Full Name",
+    "password":"Password",
+    "forgotPassword":"Forgot password?",
+    "signIn":"Sign in",
+    "register":"Register",
+    "registerNow":"Register Now",
+    "noAMember":"Not a member?",
+    "alreadyHaveAccount": "Already Have Account?",
+    "signingIn":"signing In",
+    "registering":"Registering",
+    "loginFailed":"Login failed",
+    "welcomeBack":"Welcome Back",
+    "welcome":"Welcome"
+  }
 }
