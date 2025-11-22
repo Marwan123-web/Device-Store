@@ -14,9 +14,10 @@ import { store } from "./redux/store";
 import ScrollToTop from "./components/Shared/ScrollToTop";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
+import { environment } from "./environment/environment";
 i18next.init({
   interpolation: { escapeValue: false }, // React already does escaping
-  lng: localStorage.getItem("lang") || "en", // default language
+  lng: localStorage.getItem("lang") || environment.defaultLang, // default language
   resources: {
     en: {
       common: common_en,
