@@ -9,7 +9,7 @@ const BestSelling = () => {
     data: products,
     isLoading,
   } = useQueryFetch({
-    id, url: 'http://localhost:4000/api/products'
+    id, url: 'products'
   });
   if (isLoading)
     return (

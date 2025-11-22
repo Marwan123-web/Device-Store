@@ -5,7 +5,7 @@ import SingleProduct from "./SingleProduct";
 
 const FeatureProducts = () => {
   const id: any = "Products";
-  const { data: products, isLoading } = useQueryFetch({ id, url: 'http://localhost:4000/api/products' });
+  const { data: products, isLoading } = useQueryFetch({ id, url: 'products' });
   if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">

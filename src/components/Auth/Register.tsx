@@ -20,7 +20,7 @@ const Register = () => {
 
   // useMutationFetch for calling login API
   const mutation = useMutationFetch({
-    url: "http://localhost:4000/api/auth/register", // Adjust to your actual login API endpoint
+    url: "auth/register", // Adjust to your actual login API endpoint
     method: "POST",
   });
 

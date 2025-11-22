@@ -26,7 +26,7 @@ const Search = () => {
     error,
   } = useQueryFetch({
     id,
-    url: "http://localhost:4000/api/products",
+    url: "products",
     ...(catPath && {
       params: {
         filter: JSON.stringify({ category: catPath }),

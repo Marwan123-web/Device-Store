@@ -1,6 +1,7 @@
 import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
 import axios, { AxiosRequestConfig } from 'axios';
 import urls from '../urls/urls.json';
+import { environment } from '../environment/environment';
 
 interface UseFetchArgs {
   id?: string;
@@ -29,7 +30,7 @@ const fetcher = async ({
     }
   })();
   const config: AxiosRequestConfig = {
-    url,
+    url : environment?.serverUrl + url,
     method,
     headers: {},
     ...(method !== 'GET' && { data: body }),
