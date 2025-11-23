@@ -4,19 +4,20 @@ import { LocalDataDI } from "../../models/localData.interface";
 import { FaShoppingCart } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 const NavBar = ({ changeLangFun }: { changeLangFun: Function }) => {
   const id: any = "Navbar";
   const { data: navItems, isLoading } = useQueryFetch({
     id,
   });
   const { t, i18n } = useTranslation("common");
-  const user = localStorage.getItem("user");
+  const userEmail = useSelector((state: any) => state.user?.email);
   const [navItemsList, setNavItemsList] = useState([]);
   useEffect(() => {
     if (!isLoading && navItems?.data) {
       const updatedNavItems = [
         ...navItems.data,
-        user
+        userEmail
           ? {
               id: "Profile",
               name: "Profile",
@@ -33,7 +34,7 @@ const NavBar = ({ changeLangFun }: { changeLangFun: Function }) => {
   
       setNavItemsList(updatedNavItems as any);
     }
-  }, [navItems, isLoading, user]);
+  }, [navItems, isLoading, userEmail]);
 
   if (isLoading)
     return (

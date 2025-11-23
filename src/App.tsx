@@ -13,7 +13,8 @@ import Product from "./pages/Product";
 import { useTranslation } from "react-i18next";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import Profile from "./components/Auth/Profile";
+import ProfileSideNav from "./components/Profile/ProfileSideNav";
+import { useSelector } from "react-redux";
 function App() {
   const { i18n } = useTranslation();
 
@@ -28,7 +29,7 @@ function App() {
 
   const shouldShowHeaderFooter = !excludedRoutes.includes(location.pathname);
 
-  const user = localStorage.getItem('user');
+  const user = useSelector((state: any) => state.user);  
   return (
     <section dir={i18n.language === "en" ? "ltr" : "rtl"}>
       { shouldShowHeaderFooter && <NavBar changeLangFun={changeLang} /> }
@@ -41,9 +42,9 @@ function App() {
           <Route path="/:id" element={<DetailsPage />} />
           <Route path="/product/:id" element={<DetailsPage />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
-          <Route path="/register" element={user ? <Navigate to="/" replace /> : <Register /> } />
-          <Route path="/profile" element={!user ? <Navigate to="/login" replace /> : <Profile />} />
+          <Route path="/login" element={user?.email ? <Navigate to="/" replace /> : <Login />} />
+          <Route path="/register" element={user?.email  ? <Navigate to="/" replace /> : <Register /> } />
+          <Route path="/profile" element={!user?.email  ? <Navigate to="/login" replace /> : <ProfileSideNav />} />
           <Route path="/404" element={<Notfound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>

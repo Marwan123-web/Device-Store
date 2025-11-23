@@ -4,11 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMutationFetch } from "../../hooks/useFetch";
 import { localStorageMethods } from "../../localStorage/LocalStorage";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/user/slice";
 
 const Login = () => {
   const { t } = useTranslation("common");
   const { i18n } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const lang = i18n.language;
 
@@ -25,24 +28,31 @@ const Login = () => {
   // Form submit handler
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+  
     mutation.mutate(
       { email, password },
       {
         onSuccess: (data) => {
-          // Handle successful login, e.g. save token, redirect, etc.
-          localStorageMethods.updateItem("token", data.access_token);
-          localStorageMethods.updateItem("user", data.user);
-          navigate("/");
-          toast.success(t("auth.welcomeBack"));
+          if (data?.user && data?.access_token) {
+            dispatch(
+              setUser({ ...data.user, access_token: data.access_token })
+            );
+            navigate("/");
+            toast.success(t("auth.welcomeBack"));
+          } else {
+            toast.error(t("auth.loginFailed")); // fallback error toast
+          }
         },
         onError: (error: any) => {
-          toast.error(error.response?.data?.message[lang]);
-          // Handle error
+          const errorMessage =
+            error?.response?.data?.message?.[lang] || t("auth.loginFailed");
+          toast.error(errorMessage);
           console.error("Login failed:", error);
         },
       }
     );
   };
+  
 
   return (
     <>

@@ -38,9 +38,7 @@ const fetcher = async ({
   };
 
   // Attach Authorization header if token exists
-  if (token) {
-    console.log('token',token);
-    
+  if (token) {    
     config.headers = {
       ...config.headers,
       Authorization: `Bearer ${token}`,
