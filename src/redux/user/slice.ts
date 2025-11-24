@@ -8,22 +8,21 @@ const userInitialState =
     ? localStorageMethods.getItem("user")
     : localStorageMethods.addIetm("user", null);
 const userTokenInitialState =
-    localStorageMethods.getItem("token") !== null &&
-    localStorageMethods.getItem("token") !== undefined
-      ? localStorageMethods.getItem("token")
-      : localStorageMethods.addIetm("token", null);
+  localStorageMethods.getItem("token") !== null &&
+  localStorageMethods.getItem("token") !== undefined
+    ? localStorageMethods.getItem("token")
+    : localStorageMethods.addIetm("token", null);
 
-      
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    ...userInitialState || null,
+    ...(userInitialState || null),
     ...(userTokenInitialState && {
       access_token: userTokenInitialState,
-    }) 
+    }),
   },
   reducers: userReducers,
 });
 
-export const { setUser, resetUser } = userSlice.actions;
+export const { setUser, updateUser, resetUser } = userSlice.actions;
 export default userSlice.reducer;

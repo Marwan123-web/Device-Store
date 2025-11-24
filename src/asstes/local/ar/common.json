@@ -95,5 +95,11 @@
     "loginFailed": "فشل تسجيل الدخول﻿",
     "welcomeBack": "مرحباً بعودتك﻿",
     "welcome": "مرحباً﻿"
+    },
+    "shared": {
+      "save": "حفظ﻿",
+      "saving": "جارٍ الحفظ﻿",
+      "updatedSuccessfully": "تم تحديث الملف الشخصي بنجاح﻿",
+      "samePasswords": "كلمتا المرور متطابقتان﻿"
     }
 }

@@ -97,5 +97,11 @@
     "loginFailed":"Login failed",
     "welcomeBack":"Welcome Back",
     "welcome":"Welcome"
+  },
+  "shared": {
+    "save":"Save",
+    "saving":"Saving",
+    "updatedSuccessfully": "Profile Updated Successfully",
+    "samePasswords":"Your passwords are the same."
   }
 }
