@@ -6,8 +6,10 @@ import Button from "../Shared/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, editItem } from "../../redux/cart/slice";
 import Seo from "../Shared/Seo";
+import { useTranslation } from "react-i18next";
 
 const ProductDetails = () => {
+  const { t } = useTranslation("common");
   const params = useParams();
   const [product, setProduct] = useState<ProductI>();
   const [err, setErr] = useState("");
@@ -17,14 +19,11 @@ const ProductDetails = () => {
     isLoading,
     error,
   } = useQueryFetch({
-    id,
+    id, url: `products/${params.id}`
   });
   useEffect(() => {
     if (response) {
-      let product = response?.data?.find(
-        (res: ProductI) => res?.id === params.id || res?.title === params.id
-      );
-      setProduct(product);
+      setProduct(response);
       setErr("");
     } else {
       setErr(error as any);
@@ -66,7 +65,7 @@ const ProductDetails = () => {
             </p>
             <h2 className="text-4xl">{product?.title.slice(0, 30)}</h2>
             <span className="font-semibold">
-              Price: <span className="text-2xl">{product?.price}</span>
+              Price: <span className="text-2xl">{product?.price} {t("shared.usd")}</span>
             </span>
             <span className="font-semibold">Brand: {product?.brand}</span>
             <div className="flex flex-col gap-2">
@@ -95,9 +94,9 @@ const ProductDetails = () => {
               <span>
                 Rating:{" "}
                 <span className="text-rose-500 font-bold">
-                  {product?.rating.slice(0, 3)}
+                  {product?.rating}
                 </span>
-                <span>{product?.rating.slice(3)}</span>
+                <span>/5</span>
               </span>
             </h3>
             {!foundInCart && (

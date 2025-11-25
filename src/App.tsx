@@ -15,7 +15,15 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import ProfileSideNav from "./components/Profile/ProfileSideNav";
 import { useSelector } from "react-redux";
+import { useLogout } from "./hooks/useLogout";
+import { useEffect } from "react";
+import { setLogoutCallback } from "./hooks/useFetch";
 function App() {
+  const logout = useLogout();
+  useEffect(() => {
+    setLogoutCallback(logout);
+  }, [logout]);
+  
   const { i18n } = useTranslation();
 
   const changeLang = () => {
@@ -39,8 +47,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/product" element={<Product />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/:id" element={<DetailsPage />} />
-          <Route path="/product/:id" element={<DetailsPage />} />
+          <Route path="/:id/:name" element={<DetailsPage />} />
+          <Route path="/product/:id/:name" element={<DetailsPage />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={user?.email ? <Navigate to="/" replace /> : <Login />} />
           <Route path="/register" element={user?.email  ? <Navigate to="/" replace /> : <Register /> } />

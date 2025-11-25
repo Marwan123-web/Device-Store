@@ -50,13 +50,13 @@ const Cart = () => {
               >
                 <div className="flex w-2/5">
                   <div className="w-20">
-                    <Link to={"/product/" + item.title}>
+                    <Link to={"/product/" + item.id + '/' + item.title}>
                       <img className="h-24" src={item.img} alt="" />
                     </Link>
                   </div>
                   <div className="flex flex-col justify-between lg:ml-4 ml-2 flex-grow">
                     <span className="font-bold lg:text-sm text-xs">
-                      <Link to={"/product/" + item.title}>{item.title}</Link>
+                      <Link to={"/product/" + item.id + '/' + item.title}>{item.title}</Link>
                     </span>
                     <span className="text-red-500 text-xs">
                       {item.category}

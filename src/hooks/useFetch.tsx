@@ -1,70 +1,88 @@
-import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
-import axios, { AxiosRequestConfig } from 'axios';
-import urls from '../urls/urls.json';
-import { environment } from '../environment/environment';
-
+import {
+  useQuery,
+  useMutation,
+  UseQueryResult,
+  UseMutationResult,
+} from "@tanstack/react-query";
+import axios, { AxiosRequestConfig } from "axios";
+import urls from "../urls/urls.json";
+import { environment } from "../environment/environment";
+import { toast } from "react-toastify";
 interface UseFetchArgs {
   id?: string;
   url?: string;
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+  method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   body?: any;
   params?: Record<string, any>;
   enabled?: boolean;
 }
 
-const fetcher = async ({
-  url,
-  method = 'GET',
-  body,
-  params,
-}: UseFetchArgs) => {
-  if (!url) throw new Error('URL is required for fetching');
+let logoutCallback: () => void;
+
+export function setLogoutCallback(callback: () => void) {
+  logoutCallback = callback;
+}
+
+export const fetcher = async ({ url, method = "GET", body, params }: UseFetchArgs) => {
+  if (!url) throw new Error("URL is required for fetching");
 
   const token = (() => {
     try {
-      const storedToken = localStorage.getItem('token');
-      return storedToken ? JSON.parse(storedToken) : '';
+      const storedToken = localStorage.getItem("token");
+      return storedToken ? JSON.parse(storedToken) : "";
     } catch (error) {
-      console.error('Error parsing token from localStorage', error);
-      return '';
+      console.error("Error parsing token from localStorage", error);
+      return "";
     }
   })();
+
   const config: AxiosRequestConfig = {
-    url : environment?.serverUrl + url,
+    url: environment?.serverUrl + url,
     method,
     headers: {},
-    ...(method !== 'GET' && { data: body }),
+    ...(method !== "GET" && { data: body }),
     params,
   };
 
-  // Attach Authorization header if token exists
-  if (token) {    
+  if (token) {
     config.headers = {
       ...config.headers,
       Authorization: `Bearer ${token}`,
     };
   }
 
-  const response = await axios(config);
-  return response.data;
+  try {
+    const response = await axios(config);
+    return response.data;
+  } catch (error: any) {
+    toast.error(error.response?.data?.message['en']);
+    if (error.response?.status === 401 && logoutCallback) {
+      logoutCallback();
+    }
+    throw error;
+  }
 };
+
 
 export function useQueryFetch({
   id,
   url,
   params = {},
   enabled = true,
-}: Pick<UseFetchArgs, 'id' | 'url' | 'params' | 'enabled'>): UseQueryResult<any, any> {
+}: Pick<UseFetchArgs, "id" | "url" | "params" | "enabled">): UseQueryResult<
+  any,
+  any
+> {
   const objectData: any = urls.find((item: any) => item.id === id);
-  const isLocal = objectData?.type === 'local';
+  const isLocal = objectData?.type === "local";
   const paramsKey = JSON.stringify(params);
 
   return useQuery({
-    queryKey: [url || id || 'default', paramsKey],
+    queryKey: [url || id || "default", paramsKey],
     queryFn: async () => {
       if (isLocal) return objectData;
-      if (!url) throw new Error('URL is required for fetching');
-      return fetcher({ url, method: 'GET', params });
+      if (!url) throw new Error("URL is required for fetching");
+      return fetcher({ url, method: "GET", params });
     },
     enabled: (!!url || isLocal) && enabled,
     retry: false,
@@ -73,9 +91,14 @@ export function useQueryFetch({
 
 export function useMutationFetch({
   url,
-  method = 'POST',
-}: Pick<UseFetchArgs, 'url' | 'method'>): UseMutationResult<any, any, any, unknown> {
-  if (!url) throw new Error('URL is required for mutation');
+  method = "POST",
+}: Pick<UseFetchArgs, "url" | "method">): UseMutationResult<
+  any,
+  any,
+  any,
+  unknown
+> {
+  if (!url) throw new Error("URL is required for mutation");
 
   return useMutation({
     mutationFn: (body: any) => fetcher({ url, method, body }),

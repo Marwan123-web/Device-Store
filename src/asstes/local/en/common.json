@@ -102,6 +102,7 @@
     "save":"Save",
     "saving":"Saving",
     "updatedSuccessfully": "Profile Updated Successfully",
-    "samePasswords":"Your passwords are the same."
+    "samePasswords":"Your passwords are the same.",
+    "usd": "$"
   }
 }

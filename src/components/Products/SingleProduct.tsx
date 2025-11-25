@@ -3,10 +3,12 @@ import { ProductI } from "../../models/products.interface";
 import Button from "../Shared/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, editItem } from "../../redux/cart/slice";
+import { useTranslation } from "react-i18next";
 
 const SingleProduct = ({ product }: { product: ProductI }) => {
+  const { t } = useTranslation("common");
   const dispatch = useDispatch();
-  const { img, title, brand, price } = product;
+  const { img, title, brand, price, id } = product;
   const cart = useSelector((state: any) => state.cart.items);
 
   let foundInCart = cart.find(
@@ -15,7 +17,7 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
   return (
     <div className="single-product flex flex-col bg-gray-50 gap-3 shadow-md hover:shadow-xl hover:scale-105 duration-300 px-4 py-7 rounded-sm overflow-hidden">
       <div className="flex justify-center">
-        <Link to={title}>
+        <Link to={id+'/'+title}>
           <img
             className="w-72 h-48 object-contain hover:scale-110 duration-500"
             src={img}
@@ -24,7 +26,7 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
         </Link>
       </div>
       <Link
-        to={title}
+        to={id+'/'+title}
         state={product}
         className="hover:text-rose-500 duration-300 flex justify-between items-center"
       >
@@ -36,11 +38,11 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
         Brand: <span className="font-semibold capitalize">{brand}</span>
       </p>
       <p className="text-sm text-gray-600">
-        Price: <span className="text-rose-500 font-semibold">{price}</span>
+        Price: <span className="text-rose-500 font-semibold">{price} {t("shared.usd")}</span>
       </p>
       <div className="flex justify-between items-center">
         <Link
-          to={title}
+          to={id+'/'+title}
           state={product}
           className="hover:text-rose-50 text-gray-900 duration-300 flex justify-between items-center"
         >
