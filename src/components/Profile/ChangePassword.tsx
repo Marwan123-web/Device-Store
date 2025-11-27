@@ -29,7 +29,7 @@ const ChangePassword = () => {
 
   // useMutationFetch for calling login API
   const mutation = useMutationFetch({
-    url: "auth/update", // Adjust to your actual login API endpoint
+    url: "auth/update",
     method: "PUT",
   });
   const updateProfile = () => {

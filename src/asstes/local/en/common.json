@@ -104,5 +104,10 @@
     "updatedSuccessfully": "Profile Updated Successfully",
     "samePasswords":"Your passwords are the same.",
     "usd": "$"
+  },
+  "orders": { 
+    "thankyou": "Thank You for your order",
+    "title": "We appreciate your purchase. Your order will be processed and shipped shortly.",
+    "backHome":"Back to Home"
   }
 }

@@ -18,12 +18,14 @@ import { useSelector } from "react-redux";
 import { useLogout } from "./hooks/useLogout";
 import { useEffect } from "react";
 import { setLogoutCallback } from "./hooks/useFetch";
+import Thankyou from "./pages/Thankyou";
+import OrderDetails from "./components/Orders/OrderDetails";
 function App() {
   const logout = useLogout();
   useEffect(() => {
     setLogoutCallback(logout);
   }, [logout]);
-  
+
   const { i18n } = useTranslation();
 
   const changeLang = () => {
@@ -33,14 +35,14 @@ function App() {
 
   const location = useLocation();
 
-  const excludedRoutes = ['/login', '/register']; // routes to hide header/footer
+  const excludedRoutes = ["/login", "/register"]; // routes to hide header/footer
 
   const shouldShowHeaderFooter = !excludedRoutes.includes(location.pathname);
 
-  const user = useSelector((state: any) => state.user);  
+  const user = useSelector((state: any) => state.user);
   return (
     <section dir={i18n.language === "en" ? "ltr" : "rtl"}>
-      { shouldShowHeaderFooter && <NavBar changeLangFun={changeLang} /> }
+      {shouldShowHeaderFooter && <NavBar changeLangFun={changeLang} />}
       <main className="main-padding">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -50,14 +52,32 @@ function App() {
           <Route path="/:id/:name" element={<DetailsPage />} />
           <Route path="/product/:id/:name" element={<DetailsPage />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/login" element={user?.email ? <Navigate to="/" replace /> : <Login />} />
-          <Route path="/register" element={user?.email  ? <Navigate to="/" replace /> : <Register /> } />
-          <Route path="/profile" element={!user?.email  ? <Navigate to="/login" replace /> : <ProfileSideNav />} />
+          <Route
+            path="/login"
+            element={user?.email ? <Navigate to="/" replace /> : <Login />}
+          />
+          <Route
+            path="/register"
+            element={user?.email ? <Navigate to="/" replace /> : <Register />}
+          />
+          <Route
+            path="/profile"
+            element={
+              !user?.email ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <ProfileSideNav />
+              )
+            }
+          />
+          <Route path="/thankyou" element={<Thankyou />} />
+          <Route path="/order/details/:id" element={<OrderDetails />} />
+
           <Route path="/404" element={<Notfound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </main>
-      { shouldShowHeaderFooter && <Footer /> }
+      {shouldShowHeaderFooter && <Footer />}
     </section>
   );
 }

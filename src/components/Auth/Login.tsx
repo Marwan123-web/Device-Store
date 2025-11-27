@@ -21,7 +21,7 @@ const Login = () => {
 
   // useMutationFetch for calling login API
   const mutation = useMutationFetch({
-    url: "auth/login", // Adjust to your actual login API endpoint
+    url: "auth/login",
     method: "POST",
   });
 

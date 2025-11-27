@@ -9,7 +9,7 @@ export function useLogout() {
 
   const logout = useCallback(() => {
     dispatch(resetUser());
-    navigate("/");
+    navigate("/login");
   }, [dispatch, navigate]);
 
   return logout;

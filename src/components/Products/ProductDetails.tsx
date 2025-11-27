@@ -32,7 +32,7 @@ const ProductDetails = () => {
   const cart = useSelector((state: any) => state.cart.items);
   const dispatch = useDispatch();
 
-  let foundInCart = cart.find(
+  let foundInCart = cart?.find(
     (cartproduct: ProductI) => cartproduct?.id === product?.id
   );
   if (isLoading)

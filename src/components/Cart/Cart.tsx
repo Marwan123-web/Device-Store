@@ -11,7 +11,7 @@ const Cart = () => {
 
   const dispatch = useDispatch();
   const cart = useSelector((state: any) => state.cart.items);
-  if (!cart.length) {
+  if (!cart?.length) {
     return (
       <section>
         <Herotext text={"emptyCartPage"} bg={"cartbg"} />
@@ -26,7 +26,7 @@ const Cart = () => {
             <div className="flex justify-between border-b pb-8">
               <h1 className="font-semibold text-2xl">{t("shoppingCart")}</h1>
               <h2 className="font-semibold text-2xl">
-                {cart.length} {t("items")}
+                {cart?.length} {t("items")}
               </h2>
             </div>
             <div className="flex mt-10 mb-5">

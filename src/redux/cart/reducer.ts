@@ -32,6 +32,12 @@ export const cartReducers = {
     );
     localStorageMethods.updateItem("cart", state.items);
   },
+  resetCart: (state: any) => {
+    Object.keys(state).forEach((key) => {
+      delete state[key];
+    });
+    localStorageMethods.updateItem("cart", []);
+  },
   calcTotal: (state: any) => {
     let total = 0;
     state.items.forEach((item: any) => {

@@ -55,7 +55,7 @@ export const fetcher = async ({ url, method = "GET", body, params }: UseFetchArg
     const response = await axios(config);
     return response.data;
   } catch (error: any) {
-    toast.error(error.response?.data?.message['en']);
+    toast.error(error.response?.data?.message['en'] || error.response?.data?.message?.message[0]);
     if (error.response?.status === 401 && logoutCallback) {
       logoutCallback();
     }

@@ -11,7 +11,7 @@ const SingleProduct = ({ product }: { product: ProductI }) => {
   const { img, title, brand, price, id } = product;
   const cart = useSelector((state: any) => state.cart.items);
 
-  let foundInCart = cart.find(
+  let foundInCart = cart?.find(
     (cartproduct: ProductI) => cartproduct?.id === product?.id
   );
   return (
