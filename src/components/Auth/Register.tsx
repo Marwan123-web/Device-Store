@@ -1,15 +1,17 @@
-
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutationFetch } from "../../hooks/useFetch";
 import { localStorageMethods } from "../../localStorage/LocalStorage";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/user/slice";
 
 const Register = () => {
   const { t } = useTranslation("common");
   const { i18n } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const lang = i18n.language;
 
@@ -28,18 +30,18 @@ const Register = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     mutation.mutate(
-      { email, password, name},
+      { email, password, name },
       {
         onSuccess: (data) => {
-          // Handle successful login, e.g. save token, redirect, etc.
-          localStorageMethods.updateItem("token", data.access_token);
-          localStorageMethods.updateItem("user", data.user);
-          navigate("/");
-          toast.success(t("auth.welcome"));
+          if (data?.user && data?.access_token) {
+            dispatch(
+              setUser({ ...data.user, access_token: data.access_token })
+            );
+            navigate("/");
+            toast.success(t("auth.welcome"));
+          }
         },
-        onError: (error: any) => {          
-          toast.error(error.response?.data?.message[lang]);
-          // Handle error
+        onError: (error: any) => {
           console.error("Login failed:", error);
         },
       }
@@ -62,7 +64,7 @@ const Register = () => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
+            <div>
               <label
                 htmlFor="name"
                 className="block text-sm/6 font-medium text-gray-900"
@@ -133,7 +135,9 @@ const Register = () => {
                 disabled={mutation.isPending}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                {mutation.isPending ? t("auth.registering") : t("auth.register")}
+                {mutation.isPending
+                  ? t("auth.registering")
+                  : t("auth.register")}
               </button>
             </div>
           </form>

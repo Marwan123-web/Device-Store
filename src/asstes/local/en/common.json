@@ -8,7 +8,7 @@
     "Contact": "Contact",
     "Cart": "Cart",
     "Products": "Products",
-    "Login/Register":"Login/Register"
+    "Login/Register": "Login/Register"
   },
   "Who we are?": "Who we are?",
 
@@ -84,30 +84,30 @@
   "auth": {
     "title": "Sign in to your account",
     "email": "Email address",
-    "name":"Full Name",
-    "password":"Password",
-    "forgotPassword":"Forgot password?",
-    "signIn":"Sign in",
-    "register":"Register",
-    "registerNow":"Register Now",
-    "noAMember":"Not a member?",
+    "name": "Full Name",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "signIn": "Sign in",
+    "register": "Register",
+    "registerNow": "Register Now",
+    "noAMember": "Not a member?",
     "alreadyHaveAccount": "Already Have Account?",
-    "signingIn":"signing In",
-    "registering":"Registering",
-    "loginFailed":"Login failed",
-    "welcomeBack":"Welcome Back",
-    "welcome":"Welcome"
+    "signingIn": "signing In",
+    "registering": "Registering",
+    "loginFailed": "Login failed",
+    "welcomeBack": "Welcome Back",
+    "welcome": "Welcome"
   },
   "shared": {
-    "save":"Save",
-    "saving":"Saving",
+    "save": "Save",
+    "saving": "Saving",
     "updatedSuccessfully": "Profile Updated Successfully",
-    "samePasswords":"Your passwords are the same.",
+    "samePasswords": "Your passwords are the same.",
     "usd": "$"
   },
-  "orders": { 
+  "orders": {
     "thankyou": "Thank You for your order",
     "title": "We appreciate your purchase. Your order will be processed and shipped shortly.",
-    "backHome":"Back to Home"
+    "backHome": "Back to Home"
   }
 }

@@ -5,6 +5,8 @@ import { useQueryFetch } from "../../hooks/useFetch";
 import { Order, OrderItem } from "../../models/Orders.interface";
 import OrderItemCard from "./OrderItemCard";
 import Loading from "../Shared/Loading";
+import { useSelector } from "react-redux";
+import { userRole } from "../../models/user.interface";
 
 interface OrderDetailsProps {
   order: Order;
@@ -13,11 +15,14 @@ interface OrderDetailsProps {
 
 const OrderDetails = () => {
   const params = useParams();
+  const user = useSelector((state: any) => state.user);
 
   const id: any = "order";
   const { data: order, isLoading } = useQueryFetch({
     id,
-    url: `orders/${params?.id}`,
+    url: `${user.role == userRole.USER ? "orders" : "orders/order/"}${
+      params?.id
+    }`,
   });
 
   const onBack = () => {};

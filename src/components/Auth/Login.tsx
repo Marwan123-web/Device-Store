@@ -28,7 +28,7 @@ const Login = () => {
   // Form submit handler
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     mutation.mutate(
       { email, password },
       {
@@ -44,15 +44,11 @@ const Login = () => {
           }
         },
         onError: (error: any) => {
-          const errorMessage =
-            error?.response?.data?.message?.[lang] || t("auth.loginFailed");
-          toast.error(errorMessage);
           console.error("Login failed:", error);
         },
       }
     );
   };
-  
 
   return (
     <>
