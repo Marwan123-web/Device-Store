@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {useQueryFetch} from "../../hooks/useFetch";
+import { useQueryFetch } from "../../hooks/useFetch";
 import { ProductI } from "../../models/products.interface";
 import Button from "../Shared/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, editItem } from "../../redux/cart/slice";
 import Seo from "../Shared/Seo";
 import { useTranslation } from "react-i18next";
+import Loading from "../Shared/Loading";
 
 const ProductDetails = () => {
   const { t } = useTranslation("common");
@@ -19,7 +20,8 @@ const ProductDetails = () => {
     isLoading,
     error,
   } = useQueryFetch({
-    id, url: `products/${params.id}`
+    id,
+    url: `products/${params.id}`,
   });
   useEffect(() => {
     if (response) {
@@ -35,12 +37,7 @@ const ProductDetails = () => {
   let foundInCart = cart?.find(
     (cartproduct: ProductI) => cartproduct?.id === product?.id
   );
-  if (isLoading)
-    return (
-      <p className="h-screen flex flex-col justify-center items-center text-2xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loading />;
   return (
     <>
       <Seo
@@ -65,7 +62,10 @@ const ProductDetails = () => {
             </p>
             <h2 className="text-4xl">{product?.title.slice(0, 30)}</h2>
             <span className="font-semibold">
-              Price: <span className="text-2xl">{product?.price} {t("shared.usd")}</span>
+              Price:{" "}
+              <span className="text-2xl">
+                {product?.price} {t("shared.usd")}
+              </span>
             </span>
             <span className="font-semibold">Brand: {product?.brand}</span>
             <div className="flex flex-col gap-2">

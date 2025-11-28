@@ -1,22 +1,16 @@
 import React from "react";
-import {useQueryFetch} from "../../hooks/useFetch";
+import { useQueryFetch } from "../../hooks/useFetch";
 import { ProductI } from "../../models/products.interface";
 import SingleProduct from "./SingleProduct";
+import Loading from "../Shared/Loading";
 
 const BestSelling = () => {
   const id: any = "Products";
-  const {
-    data: products,
-    isLoading,
-  } = useQueryFetch({
-    id, url: 'products'
+  const { data: products, isLoading } = useQueryFetch({
+    id,
+    url: "products",
   });
-  if (isLoading)
-    return (
-      <p className="h-screen flex flex-col justify-center items-center text-2xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loading />;
   return (
     <section className="container mx-auto">
       <h2 className="text-4xl py-10 text-center font-medium text-gray-700">

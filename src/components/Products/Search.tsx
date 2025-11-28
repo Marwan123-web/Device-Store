@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQueryFetch } from "../../hooks/useFetch";
 import { ProductI } from "../../models/products.interface";
 import SingleProduct from "./SingleProduct";
+import Loading from "../Shared/Loading";
 
 const Search = () => {
   const [products, setProducts] = useState([]);
@@ -43,12 +44,7 @@ const Search = () => {
     }
   }, [response, catPath]);
 
-  if (isLoading)
-    return (
-      <p className="h-screen flex flex-col justify-center items-center text-2xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loading />;
   if (err)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
@@ -64,8 +60,9 @@ const Search = () => {
       <div className="flex lg:justify-between justify-center gap-10 flex-nowrap">
         <div className="lg:w-[20%] w-[80%] bg-gray-50 flex flex-col gap-3 px-3 pt-2">
           <h3
-            className={`select-none cursor-pointer flex justify-between ${!catPath ? 'text-sky-400' : ''}`}
-
+            className={`select-none cursor-pointer flex justify-between ${
+              !catPath ? "text-sky-400" : ""
+            }`}
             onClick={() => {
               setCatPath("");
             }}
@@ -75,7 +72,9 @@ const Search = () => {
           </h3>
           {categories?.map((cat, i) => (
             <div
-            className={`select-none cursor-pointer flex justify-between ${catPath === cat ? 'text-sky-400' : ''}`}
+              className={`select-none cursor-pointer flex justify-between ${
+                catPath === cat ? "text-sky-400" : ""
+              }`}
               key={i}
               onClick={() => {
                 setCatPath(categories[i]);

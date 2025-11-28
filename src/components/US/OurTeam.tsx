@@ -1,21 +1,14 @@
 import React from "react";
 import { TMemberI } from "../../models/teamMembers.interface";
 import { useQueryFetch } from "../../hooks/useFetch";
+import Loading from "../Shared/Loading";
 
 const OurTeam = () => {
   const id: any = "TeamMembers";
-  const {
-    data: teamMenbers,
-    isLoading,
-  } = useQueryFetch({
+  const { data: teamMenbers, isLoading } = useQueryFetch({
     id,
   });
-  if (isLoading)
-    return (
-      <p className="h-screen flex flex-col justify-center items-center text-2xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loading />;
   return (
     <section className="bg-white py-20 ">
       <div className="w-[70%] mx-auto">

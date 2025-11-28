@@ -1,19 +1,17 @@
 import { useState } from "react";
-import {useQueryFetch} from "../../hooks/useFetch";
+import { useQueryFetch } from "../../hooks/useFetch";
 import { SlideI } from "../../models/slide.interface";
 import Slide from "./Slide";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Button from "../Shared/Button";
 import { useTranslation } from "react-i18next";
+import Loading from "../Shared/Loading";
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const id: string = "Slides";
 
-  const {
-    data: sliders,
-    isLoading,
-  } = useQueryFetch({
+  const { data: sliders, isLoading } = useQueryFetch({
     id,
   });
   const { i18n } = useTranslation("common");
@@ -33,12 +31,7 @@ const Slider = () => {
     );
   };
 
-  if (isLoading)
-    return (
-      <p className="h-screen flex flex-col justify-center items-center text-2xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loading />;
   return (
     <div className="frame relative overflow-x-hidden">
       <div

@@ -1,25 +1,18 @@
 import React from "react";
-import {useQueryFetch} from "../../hooks/useFetch";
+import { useQueryFetch } from "../../hooks/useFetch";
 import { ContactI } from "../../models/Contact.interface";
 import Herotext from "../Shared/Herotext";
 import { useTranslation } from "react-i18next";
+import Loading from "../Shared/Loading";
 
 const Contact = () => {
   const id: any = "ContactUs";
-  const {
-    data: Contacts,
-    isLoading,
-  } = useQueryFetch({
+  const { data: Contacts, isLoading } = useQueryFetch({
     id,
   });
   const { t } = useTranslation("common");
 
-  if (isLoading)
-    return (
-      <p className="h-screen flex flex-col justify-center items-center text-2xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loading />;
   return (
     <section>
       <Herotext text="Contact us" />

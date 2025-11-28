@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useQueryFetch } from "../../hooks/useFetch";
 import { Order, OrderItem } from "../../models/Orders.interface";
 import OrderItemCard from "./OrderItemCard";
+import Loading from "../Shared/Loading";
 
 interface OrderDetailsProps {
   order: Order;
@@ -20,12 +21,7 @@ const OrderDetails = () => {
   });
 
   const onBack = () => {};
-  if (isLoading)
-    return (
-      <p className="h-screen flex flex-col justify-center items-center text-2xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loading />;
   if (!isLoading && !order?.id)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">

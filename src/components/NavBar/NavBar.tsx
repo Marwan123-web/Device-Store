@@ -5,6 +5,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Loading from "../Shared/Loading";
 const NavBar = ({ changeLangFun }: { changeLangFun: Function }) => {
   const id: any = "Navbar";
   const { data: navItems, isLoading } = useQueryFetch({
@@ -31,17 +32,12 @@ const NavBar = ({ changeLangFun }: { changeLangFun: Function }) => {
               icon: "",
             },
       ];
-  
+
       setNavItemsList(updatedNavItems as any);
     }
   }, [navItems, isLoading, userEmail]);
 
-  if (isLoading)
-    return (
-      <p className="h-screen flex flex-col justify-center items-center text-2xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loading />;
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-10 top-0">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
