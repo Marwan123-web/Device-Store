@@ -17,14 +17,20 @@ import ProfileSideNav from "./components/Profile/ProfileSideNav";
 import { useSelector } from "react-redux";
 import { useLogout } from "./hooks/useLogout";
 import { useEffect } from "react";
-import { setLogoutCallback } from "./hooks/useFetch";
+import { setLogoutCallback, setNotFoundCallback } from "./hooks/useFetch";
 import Thankyou from "./pages/Thankyou";
 import OrderDetails from "./components/Orders/OrderDetails";
+import { useNotFound } from "./hooks/useNotFound";
 function App() {
   const logout = useLogout();
   useEffect(() => {
     setLogoutCallback(logout);
   }, [logout]);
+
+  const notfound = useNotFound();
+  useEffect(() => {
+    setNotFoundCallback(notfound);
+  }, [notfound]);
 
   const { i18n } = useTranslation();
 

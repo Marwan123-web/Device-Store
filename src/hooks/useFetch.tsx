@@ -18,9 +18,14 @@ interface UseFetchArgs {
 }
 
 let logoutCallback: () => void;
+let notFoundCallback: () => void;
 
 export function setLogoutCallback(callback: () => void) {
   logoutCallback = callback;
+}
+
+export function setNotFoundCallback(callback: () => void) {
+  notFoundCallback = callback;
 }
 
 export const fetcher = async ({
@@ -67,6 +72,8 @@ export const fetcher = async ({
     );
     if (error.response?.status === 401 && logoutCallback) {
       logoutCallback();
+    } else {
+      notFoundCallback();
     }
     throw error;
   }
