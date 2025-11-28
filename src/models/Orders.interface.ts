@@ -17,10 +17,17 @@ export interface OrderItem {
   price: string;
 }
 
+export interface ShippingMethod {
+  id: number;
+  name: string;
+  price: string;
+}
+
 export interface Order {
   id: number;
   customerId: number;
   shippingMethodId: number;
+  shippingMethod: ShippingMethod;
   shippingCost: string;
   total: number;
   orderItems: OrderItem[];

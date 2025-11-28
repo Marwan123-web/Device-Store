@@ -6,6 +6,7 @@ import Button from "../Shared/Button";
 import { deleteItem, editItem } from "../../redux/cart/slice";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import CartItem from "./CartItem";
 const Cart = () => {
   const { t } = useTranslation("common");
 
@@ -43,71 +44,9 @@ const Cart = () => {
                 {t("total")}
               </h3>
             </div>
-            {cart.map((item: ProductI, index: number) => (
-              <div
-                className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"
-                key={index}
-              >
-                <div className="flex w-2/5">
-                  <div className="w-20">
-                    <Link to={"/product/" + item.id + '/' + item.title}>
-                      <img className="h-24" src={item.img} alt="" />
-                    </Link>
-                  </div>
-                  <div className="flex flex-col justify-between lg:ml-4 ml-2 flex-grow">
-                    <span className="font-bold lg:text-sm text-xs">
-                      <Link to={"/product/" + item.id + '/' + item.title}>{item.title}</Link>
-                    </span>
-                    <span className="text-red-500 text-xs">
-                      {item.category}
-                    </span>
-                    <span
-                      className="font-semibold hover:text-red-500 text-gray-500 text-xs"
-                      onClick={() => dispatch(deleteItem(item as any))}
-                    >
-                      {t("remove")}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex justify-center items-center w-1/5 lg:flex-row flex-col">
-                  <Button
-                    label={"-"}
-                    classes={
-                      "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md mx-3"
-                    }
-                    ButtonFun={() =>
-                      dispatch(
-                        editItem({
-                          ...item,
-                          method: "remove",
-                        } as any)
-                      )
-                    }
-                  />
-                  <span>{item?.quantity}</span>
-                  <Button
-                    label={"+"}
-                    classes={
-                      "bg-sky-400 text-sky-50 hover:bg-sky-50 hover:text-sky-400 duration-300 border border-sky-400 px-2 py-1 rounded-md mx-3"
-                    }
-                    ButtonFun={() =>
-                      dispatch(
-                        editItem({
-                          ...item,
-                          method: "add",
-                        } as any)
-                      )
-                    }
-                  />
-                </div>
-                <span className="text-center w-1/5 font-semibold text-sm">
-                  ${item.price}
-                </span>
-                <span className="text-center w-1/5 font-semibold text-sm">
-                  ${parseInt(item.price) * item.quantity}
-                </span>
-              </div>
-            ))}
+            {cart.map((item: ProductI, index: number) => {
+              return <CartItem key={index} cartItem={item} />;
+            })}
 
             <Link
               to="/"

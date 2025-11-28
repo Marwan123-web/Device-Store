@@ -1,6 +1,6 @@
 import React from "react";
 import DynamicTable from "../Shared/Table";
-import { Order } from "./Orders.interface";
+import { Order } from "../../models/Orders.interface";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -34,14 +34,14 @@ const OrderTable = ({ orders }: { orders: Order[] }) => {
       cell: (info: any) => `${info.getValue()}`,
     },
     {
+      accessorKey: "shippingMethod.name",
+      header: "Shipping Method",
+      cell: (info: any) => `${info.getValue()}`,
+    },
+    {
       accessorKey: "total",
       header: "Total",
       cell: (info: any) => `${info.getValue()} ${t("shared.usd")}`,
-    },
-    {
-      accessorKey: "shippingCost",
-      header: "Shipping Cost",
-      cell: (info: any) => `$${info.getValue()}`,
     },
     {
       accessorKey: "createdAt",

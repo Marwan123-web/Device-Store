@@ -2,7 +2,8 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQueryFetch } from "../../hooks/useFetch";
-import { Order, OrderItem } from "./Orders.interface";
+import { Order, OrderItem } from "../../models/Orders.interface";
+import OrderItemCard from "./OrderItemCard";
 
 interface OrderDetailsProps {
   order: Order;
@@ -17,20 +18,18 @@ const OrderDetails = () => {
     id,
     url: `orders/${params?.id}`,
   });
-  let subtotal;
-  useEffect(() => {
-    subtotal = order?.orderItems?.reduce(
-      (sum: number, item: OrderItem) =>
-        sum + parseFloat(item.price) * item.quantity,
-      0
-    );
-  }, [order]);
 
   const onBack = () => {};
   if (isLoading)
     return (
       <p className="h-screen flex flex-col justify-center items-center text-2xl">
         Loading...
+      </p>
+    );
+  if (!isLoading && !order?.id)
+    return (
+      <p className="h-screen flex flex-col justify-center items-center text-2xl">
+        No Data...
       </p>
     );
   return (
@@ -48,7 +47,7 @@ const OrderDetails = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">
-                  Order #{order.id}
+                  Order #{order?.id}
                 </h1>
                 <p className="mt-1 text-sm text-gray-500">
                   Placed on {new Date(order.createdAt).toLocaleDateString()}
@@ -80,42 +79,11 @@ const OrderDetails = () => {
                 Order Items
               </h2>
               <div className="space-y-4">
-                {order?.orderItems.map((item: OrderItem) => (
-                  <div
-                    key={item.id}
-                    className="flex items-start space-x-6 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
-                  >
-                    <img
-                      src={item.product.img}
-                      alt={item.product.title}
-                      className="w-24 h-24 object-contain rounded-lg flex-shrink-0"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                        {item.product.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 mb-2 max-w-prose">
-                        {item.product.description.slice(0, 150)}...
-                      </p>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500">
-                          {item.product.category} • {item.product.brand}
-                        </span>
-                        <span className="font-semibold text-gray-900">
-                          ${item.product.price}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="text-right flex-shrink-0">
-                      <p className="text-2xl font-bold text-gray-900">
-                        ${parseFloat(item.price) * item.quantity}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        Qty: {item.quantity}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                {order?.orderItems.map((orderItem: OrderItem) => {
+                  return (
+                    <OrderItemCard key={orderItem.id} orderItem={orderItem} />
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -129,7 +97,7 @@ const OrderDetails = () => {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
                   <span>Subtotal:</span>
-                  <span>${subtotal}</span>
+                  <span>${order?.subTotal}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Shipping:</span>
@@ -147,7 +115,7 @@ const OrderDetails = () => {
               <div className="space-y-3">
                 <div className="flex justify-between text-sm text-gray-500">
                   <span>Shipping Method:</span>
-                  <span>#SM{order.shippingMethodId}</span>
+                  <span>{order.shippingMethod.name}</span>
                 </div>
                 <div className="flex justify-between text-sm text-gray-500">
                   <span>Order Date:</span>

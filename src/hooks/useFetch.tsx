@@ -23,7 +23,12 @@ export function setLogoutCallback(callback: () => void) {
   logoutCallback = callback;
 }
 
-export const fetcher = async ({ url, method = "GET", body, params }: UseFetchArgs) => {
+export const fetcher = async ({
+  url,
+  method = "GET",
+  body,
+  params,
+}: UseFetchArgs) => {
   if (!url) throw new Error("URL is required for fetching");
 
   const token = (() => {
@@ -55,14 +60,17 @@ export const fetcher = async ({ url, method = "GET", body, params }: UseFetchArg
     const response = await axios(config);
     return response.data;
   } catch (error: any) {
-    toast.error(error.response?.data?.message['en'] || error.response?.data?.message?.message[0]);
+    toast.error(
+      error.response?.data?.message["en"] ||
+        error.response?.data?.message?.message ||
+        error.response?.data?.message?.message[0]
+    );
     if (error.response?.status === 401 && logoutCallback) {
       logoutCallback();
     }
     throw error;
   }
 };
-
 
 export function useQueryFetch({
   id,

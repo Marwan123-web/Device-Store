@@ -6,6 +6,7 @@ import Input from "../Shared/Input";
 import { useMutationFetch, useQueryFetch } from "../../hooks/useFetch";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { ShippingMethod } from "../../models/Orders.interface";
 const Summary = () => {
   const navigate = useNavigate();
   const { t } = useTranslation("common");
@@ -15,7 +16,9 @@ const Summary = () => {
   useEffect(() => {
     dispatch(calcTotal());
   }, [cart, dispatch]);
-  const [shippingMethod, setShippingMethod] = useState<number>();
+  const [shippingMethod, setShippingMethod] = useState<
+    ShippingMethod | undefined
+  >();
 
   const id: any = "shipping";
   const { data: shippingMethods, isLoading } = useQueryFetch({
@@ -24,9 +27,17 @@ const Summary = () => {
   });
   useEffect(() => {
     if (shippingMethods?.length) {
-      setShippingMethod(shippingMethods[0].id);
+      setShippingMethod(shippingMethods[0]);
     }
   }, [shippingMethods]);
+
+  const selectShippingMethod = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const id = Number(event.target.value);
+    const selected = shippingMethods?.find((m: ShippingMethod) => m.id === id);
+    setShippingMethod(selected);
+  };
 
   const mutation = useMutationFetch({
     url: "orders",
@@ -34,6 +45,9 @@ const Summary = () => {
   });
 
   const handleSubmit = () => {
+    if (!shippingMethod?.id) {
+      toast.error("You have to select shipping method");
+    }
     const items = cart?.items.map((item: any) => {
       return {
         productId: item.id,
@@ -42,7 +56,7 @@ const Summary = () => {
     });
 
     mutation.mutate(
-      { shippingMethodId: shippingMethod, orderItems: items },
+      { shippingMethodId: shippingMethod?.id, orderItems: items },
       {
         onSuccess: (data) => {
           dispatch(resetCart());
@@ -72,15 +86,14 @@ const Summary = () => {
         </label>
         <select
           className="block p-2 text-gray-600 w-full text-sm"
-          value={shippingMethod}
-          onChange={(e) => setShippingMethod(+e.target.value)}
+          value={shippingMethod?.id ?? ""}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+            selectShippingMethod(event);
+          }}
         >
-          {shippingMethods?.map((shippingMethod: any) => (
-            <option value={shippingMethod.id} key={shippingMethod.id}>
-              {" "}
-              {shippingMethod.name}
-              {"-"}
-              {shippingMethod.price}$
+          {shippingMethods?.map((method: ShippingMethod) => (
+            <option value={method.id} key={method.id}>
+              {method.name}-{method.price}$
             </option>
           ))}
         </select>
@@ -109,7 +122,9 @@ const Summary = () => {
       <div className="border-t mt-8">
         <div className="flex font-semibold justify-between py-6 text-sm uppercase">
           <span> {t("totalCost")}</span>
-          {cart?.items?.length && <span>${cart?.total + shippingMethod}</span>}
+          {cart?.items?.length && (
+            <span>${cart?.total + +(shippingMethod?.price || 0)}</span>
+          )}
         </div>
         <button
           className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
